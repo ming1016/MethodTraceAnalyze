@@ -56,13 +56,13 @@ public class Lexer {
         while !scanner.isAtEnd {
             for operater in operaters {
                 let opStr = operater.description
-                if (scanner.scanString(opStr, into: nil)) {
+                if (scanner.scanString(opStr) != nil) {
                     tks.append(.id(opStr))
                 }
             }
             var result:NSString?
             result = nil
-            if scanner.scanUpToCharacters(from: set, into: &result) {
+            if (scanner.scanUpToCharacters(from: set) != nil) {
                 let resultString = result! as String
                 if resultString == "starmingnewline" {
                     tks.append(.newLine)
@@ -73,9 +73,6 @@ public class Lexer {
                 }
             }
         }
-//        tks = tks.filter {
-//            $0 != .id(" ")
-//        }
         tks.append(.eof)
         return tks
     }
