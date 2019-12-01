@@ -60,16 +60,15 @@ public class Lexer {
                     tks.append(.id(opStr))
                 }
             }
-            var result:NSString?
-            result = nil
-            if (scanner.scanUpToCharacters(from: set) != nil) {
-                let resultString = result! as String
+            
+            if let result = scanner.scanUpToCharacters(from: set) {
+                let resultString = result as String
                 if resultString == "starmingnewline" {
                     tks.append(.newLine)
                 } else if resultString == "starmingspace" {
                     tks.append(.space)
                 } else {
-                    tks.append(.id(result! as String))
+                    tks.append(.id(result as String))
                 }
             }
         }

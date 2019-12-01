@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3823AC2393B8C600CB52C0 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823AB2393B8C600CB52C0 /* test.json */; };
+		3A3823B32393E7BA00CB52C0 /* ParseLaunchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B22393E7BA00CB52C0 /* ParseLaunchJSON.swift */; };
+		3A3823B52393E7D600CB52C0 /* LaunchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B42393E7D600CB52C0 /* LaunchJSON.swift */; };
+		3A3823BC2393E84200CB52C0 /* ParseXcodeprojNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B72393E84100CB52C0 /* ParseXcodeprojNode.swift */; };
+		3A3823BD2393E84200CB52C0 /* ParseXcodeprojSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B82393E84100CB52C0 /* ParseXcodeprojSource.swift */; };
+		3A3823BE2393E84200CB52C0 /* ParseXcodeprojSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B92393E84100CB52C0 /* ParseXcodeprojSection.swift */; };
+		3A3823BF2393E84200CB52C0 /* ParseXcodeprojTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823BA2393E84100CB52C0 /* ParseXcodeprojTokens.swift */; };
+		3A3823C02393E84200CB52C0 /* ParseXcodeprojTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823BB2393E84200CB52C0 /* ParseXcodeprojTreeNode.swift */; };
+		3A3823C22393E86C00CB52C0 /* TestXcodeproj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823C12393E86C00CB52C0 /* TestXcodeproj.swift */; };
+		3A3823C42393E88600CB52C0 /* project.pbxproj in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823C32393E88600CB52C0 /* project.pbxproj */; };
+		3A3823C92393E8C600CB52C0 /* ParseOCTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */; };
+		3A3823CA2393E8C600CB52C0 /* ParseOCTokensDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */; };
+		3A3823CB2393E8C600CB52C0 /* ParseOCNodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823C82393E8C600CB52C0 /* ParseOCNodes.swift */; };
+		3A3823CD2393E8DD00CB52C0 /* TestOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823CC2393E8DD00CB52C0 /* TestOC.swift */; };
+		3A3823CF2393E8F100CB52C0 /* AppDelegate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823CE2393E8F100CB52C0 /* AppDelegate.txt */; };
+		3A3823D12393E92400CB52C0 /* XcodeProjectParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823D02393E92400CB52C0 /* XcodeProjectParse.swift */; };
+		3A3823D32393EAAF00CB52C0 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823D22393EAAE00CB52C0 /* Dictionary.swift */; };
+		3A3823D82393ECE100CB52C0 /* ParseStandXMLTagTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823D52393ECE000CB52C0 /* ParseStandXMLTagTokens.swift */; };
+		3A3823D92393ECE100CB52C0 /* ParseStandXMLTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823D62393ECE000CB52C0 /* ParseStandXMLTags.swift */; };
+		3A3823DA2393ECE100CB52C0 /* ParseStandXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823D72393ECE100CB52C0 /* ParseStandXML.swift */; };
+		3A3823DC2393ECF500CB52C0 /* TestXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823DB2393ECF500CB52C0 /* TestXML.swift */; };
+		3A3823E02393ED2500CB52C0 /* subscriptionSimple.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DD2393ED2500CB52C0 /* subscriptionSimple.xml */; };
+		3A3823E12393ED2500CB52C0 /* contents.xcworkspacedata in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */; };
+		3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DF2393ED2500CB52C0 /* subscription.xml */; };
 		3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B5239202F0006A2F48 /* AppDelegate.swift */; };
 		3AED19B8239202F0006A2F48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B7239202F0006A2F48 /* ContentView.swift */; };
 		3AED19BA239202F2006A2F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AED19B9239202F2006A2F48 /* Assets.xcassets */; };
@@ -43,6 +67,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A3823AB2393B8C600CB52C0 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		3A3823B22393E7BA00CB52C0 /* ParseLaunchJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLaunchJSON.swift; sourceTree = "<group>"; };
+		3A3823B42393E7D600CB52C0 /* LaunchJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchJSON.swift; sourceTree = "<group>"; };
+		3A3823B72393E84100CB52C0 /* ParseXcodeprojNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseXcodeprojNode.swift; sourceTree = "<group>"; };
+		3A3823B82393E84100CB52C0 /* ParseXcodeprojSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseXcodeprojSource.swift; sourceTree = "<group>"; };
+		3A3823B92393E84100CB52C0 /* ParseXcodeprojSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseXcodeprojSection.swift; sourceTree = "<group>"; };
+		3A3823BA2393E84100CB52C0 /* ParseXcodeprojTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseXcodeprojTokens.swift; sourceTree = "<group>"; };
+		3A3823BB2393E84200CB52C0 /* ParseXcodeprojTreeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseXcodeprojTreeNode.swift; sourceTree = "<group>"; };
+		3A3823C12393E86C00CB52C0 /* TestXcodeproj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestXcodeproj.swift; sourceTree = "<group>"; };
+		3A3823C32393E88600CB52C0 /* project.pbxproj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.pbxproject; path = project.pbxproj; sourceTree = "<group>"; };
+		3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOCTokens.swift; sourceTree = "<group>"; };
+		3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOCTokensDefine.swift; sourceTree = "<group>"; };
+		3A3823C82393E8C600CB52C0 /* ParseOCNodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseOCNodes.swift; sourceTree = "<group>"; };
+		3A3823CC2393E8DD00CB52C0 /* TestOC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestOC.swift; sourceTree = "<group>"; };
+		3A3823CE2393E8F100CB52C0 /* AppDelegate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppDelegate.txt; sourceTree = "<group>"; };
+		3A3823D02393E92400CB52C0 /* XcodeProjectParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XcodeProjectParse.swift; sourceTree = "<group>"; };
+		3A3823D22393EAAE00CB52C0 /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		3A3823D52393ECE000CB52C0 /* ParseStandXMLTagTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseStandXMLTagTokens.swift; sourceTree = "<group>"; };
+		3A3823D62393ECE000CB52C0 /* ParseStandXMLTags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseStandXMLTags.swift; sourceTree = "<group>"; };
+		3A3823D72393ECE100CB52C0 /* ParseStandXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseStandXML.swift; sourceTree = "<group>"; };
+		3A3823DB2393ECF500CB52C0 /* TestXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestXML.swift; sourceTree = "<group>"; };
+		3A3823DD2393ED2500CB52C0 /* subscriptionSimple.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscriptionSimple.xml; sourceTree = "<group>"; };
+		3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contents.xcworkspacedata; sourceTree = "<group>"; };
+		3A3823DF2393ED2500CB52C0 /* subscription.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscription.xml; sourceTree = "<group>"; };
 		3AED19B2239202F0006A2F48 /* MethodTraceAnalyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MethodTraceAnalyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AED19B5239202F0006A2F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AED19B7239202F0006A2F48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +141,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A3823AD2393E0EB00CB52C0 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				3A3823B22393E7BA00CB52C0 /* ParseLaunchJSON.swift */,
+				3A3823B42393E7D600CB52C0 /* LaunchJSON.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		3A3823B62393E81400CB52C0 /* Xcodeproj */ = {
+			isa = PBXGroup;
+			children = (
+				3A3823B72393E84100CB52C0 /* ParseXcodeprojNode.swift */,
+				3A3823B92393E84100CB52C0 /* ParseXcodeprojSection.swift */,
+				3A3823B82393E84100CB52C0 /* ParseXcodeprojSource.swift */,
+				3A3823BA2393E84100CB52C0 /* ParseXcodeprojTokens.swift */,
+				3A3823BB2393E84200CB52C0 /* ParseXcodeprojTreeNode.swift */,
+				3A3823C12393E86C00CB52C0 /* TestXcodeproj.swift */,
+				3A3823D02393E92400CB52C0 /* XcodeProjectParse.swift */,
+			);
+			path = Xcodeproj;
+			sourceTree = "<group>";
+		};
+		3A3823C52393E8AB00CB52C0 /* OC */ = {
+			isa = PBXGroup;
+			children = (
+				3A3823C82393E8C600CB52C0 /* ParseOCNodes.swift */,
+				3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */,
+				3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */,
+				3A3823CC2393E8DD00CB52C0 /* TestOC.swift */,
+			);
+			path = OC;
+			sourceTree = "<group>";
+		};
+		3A3823D42393EC5100CB52C0 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				3A3823D72393ECE100CB52C0 /* ParseStandXML.swift */,
+				3A3823D62393ECE000CB52C0 /* ParseStandXMLTags.swift */,
+				3A3823D52393ECE000CB52C0 /* ParseStandXMLTagTokens.swift */,
+				3A3823DB2393ECF500CB52C0 /* TestXML.swift */,
+			);
+			path = XML;
+			sourceTree = "<group>";
+		};
 		3AED19A9239202F0006A2F48 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +209,10 @@
 		3AED19B4239202F0006A2F48 /* MethodTraceAnalyze */ = {
 			isa = PBXGroup;
 			children = (
+				3A3823D42393EC5100CB52C0 /* XML */,
+				3A3823C52393E8AB00CB52C0 /* OC */,
+				3A3823B62393E81400CB52C0 /* Xcodeproj */,
+				3A3823AD2393E0EB00CB52C0 /* Launch */,
 				3AED1A082392C532006A2F48 /* JSON */,
 				3AED19E9239242C5006A2F48 /* Core */,
 				3AED19E623923987006A2F48 /* Data */,
@@ -159,7 +256,13 @@
 		3AED19E623923987006A2F48 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3A3823CE2393E8F100CB52C0 /* AppDelegate.txt */,
+				3A3823AB2393B8C600CB52C0 /* test.json */,
+				3A3823C32393E88600CB52C0 /* project.pbxproj */,
 				3AED19E72392399E006A2F48 /* startTrace.json */,
+				3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */,
+				3A3823DF2393ED2500CB52C0 /* subscription.xml */,
+				3A3823DD2393ED2500CB52C0 /* subscriptionSimple.xml */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -167,6 +270,7 @@
 		3AED19E9239242C5006A2F48 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3A3823D22393EAAE00CB52C0 /* Dictionary.swift */,
 				3AED1A012392A517006A2F48 /* FileHandle.swift */,
 				3AED19FF2392A517006A2F48 /* Handy.swift */,
 				3AED1A002392A517006A2F48 /* Lexer.swift */,
@@ -292,6 +396,12 @@
 			files = (
 				3AED19E82392399E006A2F48 /* startTrace.json in Resources */,
 				3AED19C0239202F2006A2F48 /* Main.storyboard in Resources */,
+				3A3823AC2393B8C600CB52C0 /* test.json in Resources */,
+				3A3823C42393E88600CB52C0 /* project.pbxproj in Resources */,
+				3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */,
+				3A3823E12393ED2500CB52C0 /* contents.xcworkspacedata in Resources */,
+				3A3823E02393ED2500CB52C0 /* subscriptionSimple.xml in Resources */,
+				3A3823CF2393E8F100CB52C0 /* AppDelegate.txt in Resources */,
 				3AED19BD239202F2006A2F48 /* Preview Assets.xcassets in Resources */,
 				3AED19BA239202F2006A2F48 /* Assets.xcassets in Resources */,
 			);
@@ -318,15 +428,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3823CA2393E8C600CB52C0 /* ParseOCTokensDefine.swift in Sources */,
 				3AED1A032392A517006A2F48 /* Token.swift in Sources */,
+				3A3823DA2393ECE100CB52C0 /* ParseStandXML.swift in Sources */,
 				3AED1A132392C5F8006A2F48 /* TestJSON.swift in Sources */,
+				3A3823D92393ECE100CB52C0 /* ParseStandXMLTags.swift in Sources */,
+				3A3823BF2393E84200CB52C0 /* ParseXcodeprojTokens.swift in Sources */,
 				3AED1A0F2392C5CE006A2F48 /* ParseJSONTokens.swift in Sources */,
+				3A3823B32393E7BA00CB52C0 /* ParseLaunchJSON.swift in Sources */,
+				3A3823D12393E92400CB52C0 /* XcodeProjectParse.swift in Sources */,
+				3A3823B52393E7D600CB52C0 /* LaunchJSON.swift in Sources */,
+				3A3823BD2393E84200CB52C0 /* ParseXcodeprojSource.swift in Sources */,
 				3AED1A062392A517006A2F48 /* FileHandle.swift in Sources */,
+				3A3823BE2393E84200CB52C0 /* ParseXcodeprojSection.swift in Sources */,
+				3A3823DC2393ECF500CB52C0 /* TestXML.swift in Sources */,
+				3A3823D82393ECE100CB52C0 /* ParseStandXMLTagTokens.swift in Sources */,
+				3A3823C02393E84200CB52C0 /* ParseXcodeprojTreeNode.swift in Sources */,
+				3A3823C22393E86C00CB52C0 /* TestXcodeproj.swift in Sources */,
 				3AED19B8239202F0006A2F48 /* ContentView.swift in Sources */,
 				3AED1A072392A517006A2F48 /* Test.swift in Sources */,
 				3AED1A042392A517006A2F48 /* Handy.swift in Sources */,
+				3A3823CD2393E8DD00CB52C0 /* TestOC.swift in Sources */,
+				3A3823D32393EAAF00CB52C0 /* Dictionary.swift in Sources */,
 				3AED1A102392C5CE006A2F48 /* ParseJSONItem.swift in Sources */,
+				3A3823CB2393E8C600CB52C0 /* ParseOCNodes.swift in Sources */,
+				3A3823C92393E8C600CB52C0 /* ParseOCTokens.swift in Sources */,
 				3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */,
+				3A3823BC2393E84200CB52C0 /* ParseXcodeprojNode.swift in Sources */,
 				3AED1A052392A517006A2F48 /* Lexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

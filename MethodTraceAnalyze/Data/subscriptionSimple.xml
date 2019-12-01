@@ -1,0 +1,47 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>星光社 - 戴铭的博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://ming1016.github.io/"/>
+  <updated>2019-07-28T16:52:44.082Z</updated>
+  <id>http://ming1016.github.io/</id>
+  
+  <author>
+    <name>戴铭</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS 开发舆图</title>
+    <link href="http://ming1016.github.io/2019/07/29/ios-map/"/>
+    <id>http://ming1016.github.io/2019/07/29/ios-map/</id>
+    <published>2019-07-29T04:49:06.000Z</published>
+    <updated>2019-07-28T16:52:44.082Z</updated>
+    
+    <content type="html"><![CDATA[<p>43篇 <a href="https://time.geekbang.org/column/intro/161" target="_blank" rel="external">《iOS开发高手课》</a>已完成，后面会对内容进行迭代，丰富下内容和配图。最近画了张 iOS 开发全景舆图，还有相关一些资料整理，方便我平时开发 App 时参看。舆图如下：</p>
+<p><img src="/uploads/ios-map/1.png" alt=""><br><img src="/uploads/ios-map/2.png" alt=""><br><img src="/uploads/ios-map/3.png" alt=""><br><img src="/uploads/ios-map/4.png" alt=""><br><img src="/uploads/ios-map/5.png" alt=""><br><img src="/uploads/ios-map/6.png" alt=""></p>
+<p>接下来，我按照 iOS 开发地图的顺序，和你推荐一些相关的学习资料。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>学习 iOS 开发最好是从学习一个完整的 App 入手，GitHub上的<a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">Open-Source iOS Apps</a><br>项目，收录了大量开源的完整 App 例子，比如 <a href="https://github.com/Dimillian/SwiftHN" target="_blank" rel="external">Hacker News Reader</a> 等已经上架了 App Store 的应用程序，所有例子都会标注是否上架 App Store的、所使用开发语言、推荐等级等信息，有利于进行选择学习。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;43篇 &lt;a href=&quot;https://time.geekbang.org/column/intro/161&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《iOS开发高手课》&lt;/a&gt;已完成，后面会对内容进行迭代，丰富下内容和配图。最近画了张 iOS 开
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+</feed>

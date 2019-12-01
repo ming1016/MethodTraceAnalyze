@@ -1,0 +1,553 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>星光社 - 戴铭的博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://ming1016.github.io/"/>
+  <updated>2019-07-28T16:52:44.082Z</updated>
+  <id>http://ming1016.github.io/</id>
+  
+  <author>
+    <name>戴铭</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS 开发舆图</title>
+    <link href="http://ming1016.github.io/2019/07/29/ios-map/"/>
+    <id>http://ming1016.github.io/2019/07/29/ios-map/</id>
+    <published>2019-07-29T04:49:06.000Z</published>
+    <updated>2019-07-28T16:52:44.082Z</updated>
+    
+    <content type="html"><![CDATA[<p>43篇 <a href="https://time.geekbang.org/column/intro/161" target="_blank" rel="external">《iOS开发高手课》</a>已完成，后面会对内容进行迭代，丰富下内容和配图。最近画了张 iOS 开发全景舆图，还有相关一些资料整理，方便我平时开发 App 时参看。舆图如下：</p>
+<p><img src="/uploads/ios-map/1.png" alt=""><br><img src="/uploads/ios-map/2.png" alt=""><br><img src="/uploads/ios-map/3.png" alt=""><br><img src="/uploads/ios-map/4.png" alt=""><br><img src="/uploads/ios-map/5.png" alt=""><br><img src="/uploads/ios-map/6.png" alt=""></p>
+<p>接下来，我按照 iOS 开发地图的顺序，和你推荐一些相关的学习资料。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>学习 iOS 开发最好是从学习一个完整的 App 入手，GitHub上的<a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">Open-Source iOS Apps</a><br>项目，收录了大量开源的完整 App 例子，比如 <a href="https://github.com/Dimillian/SwiftHN" target="_blank" rel="external">Hacker News Reader</a> 等已经上架了 App Store 的应用程序，所有例子都会标注是否上架 App Store的、所使用开发语言、推荐等级等信息，有利于进行选择学习。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;43篇 &lt;a href=&quot;https://time.geekbang.org/column/intro/161&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《iOS开发高手课》&lt;/a&gt;已完成，后面会对内容进行迭代，丰富下内容和配图。最近画了张 iOS 开
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>白龙班</title>
+    <link href="http://ming1016.github.io/2019/06/19/white-dragon-class/"/>
+    <id>http://ming1016.github.io/2019/06/19/white-dragon-class/</id>
+    <published>2019-06-19T11:24:38.000Z</published>
+    <updated>2019-06-19T16:06:07.108Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是我十二年前写的一篇小说。当年每天早上8点半上班，为了写这篇，我四点起床，写到早饭前，坚持了好几周才完成。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>秋天的白龙山上，茂密的树叶渐渐枯萎，风中开始透着丝丝寒意。白龙班里多了五十来个一级成员。这些优秀的学生分布在不同的老师手上，如今飞逸老师手下已经有了九个一级成员，两个二级成员。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;这是我十二年前写的一篇小说。当年每天早上8点半上班，为了写这篇，我四点起床，写到早饭前，坚持了好几周才完成。&lt;/p&gt;
+&lt;h2 id=&quot;正文&quot;
+    
+    </summary>
+    
+      <category term="My novel" scheme="http://ming1016.github.io/categories/My-novel/"/>
+    
+    
+      <category term="Novel" scheme="http://ming1016.github.io/tags/Novel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>这次swift大会分享准备的幻灯片和 demo</title>
+    <link href="http://ming1016.github.io/2018/09/17/produce-slides-of-third-at-swift-conference/"/>
+    <id>http://ming1016.github.io/2018/09/17/produce-slides-of-third-at-swift-conference/</id>
+    <published>2018-09-17T02:04:11.000Z</published>
+    <updated>2018-09-17T08:53:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>第三届在北京举办的@swift大会，我分享了用 swift 写解释器的思路，这个解释器 demo 我放在了 github 上，地址在 <a href="https://github.com/ming1016/HTN/tree/master/Sources/Core/OC" target="_blank" rel="external">https://github.com/ming1016/HTN/tree/master/Sources/Core/OC</a> 。demo 支持简单的几个 OC 语法，按照这个架子和思路大家可以当作一个去支持一个语言，和设计自己特定语法的雏形来练手。当年前端人人都在用的 babel 转义器的作者也写过一个雏型例子，看完这个雏型就大致了解了 babel 这个工程整个解析的思路，工程代码看起来轻松不少，从里面也能很快的学到了很多自己需要的知识。大会上我还提到了一个 demo，地址<a href="https://github.com/ming1016/ArchitectureDemo" target="_blank" rel="external">https://github.com/ming1016/ArchitectureDemo</a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;第三届在北京举办的@swift大会，我分享了用 swift 写解释器的思路，这个解释器 demo 我放在了 github 上，地址在 &lt;a href=&quot;https://github.com/ming1016/HTN/tree/master/Sources/Core/OC&quot; 
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="编译" scheme="http://ming1016.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+    
+      <category term="Slides" scheme="http://ming1016.github.io/tags/Slides/"/>
+    
+      <category term="swift" scheme="http://ming1016.github.io/tags/swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>18年上半年procreate的练习图图</title>
+    <link href="http://ming1016.github.io/2018/09/14/draw-with-procreate-in-ipad-during-pre-half-in-2018/"/>
+    <id>http://ming1016.github.io/2018/09/14/draw-with-procreate-in-ipad-during-pre-half-in-2018/</id>
+    <published>2018-09-14T15:08:12.000Z</published>
+    <updated>2018-09-18T09:51:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/1.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/2.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/3.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/4.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/5.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/6.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/7.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/8.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/9.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/10.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/11.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/12.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/13.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/14.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/15.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/16.jpg" alt=""><br><img src="/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/17.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/uploads/draw-with-procreate-in-ipad-during-pre-half-in-2018/1.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/draw-with-procreate-in-ipad-d
+    
+    </summary>
+    
+      <category term="My painting" scheme="http://ming1016.github.io/categories/My-painting/"/>
+    
+    
+      <category term="Painting" scheme="http://ming1016.github.io/tags/Painting/"/>
+    
+      <category term="iPad" scheme="http://ming1016.github.io/tags/iPad/"/>
+    
+      <category term="Procreate" scheme="http://ming1016.github.io/tags/Procreate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入剖析 JavaScriptCore</title>
+    <link href="http://ming1016.github.io/2018/04/21/deeply-analyse-javascriptcore/"/>
+    <id>http://ming1016.github.io/2018/04/21/deeply-analyse-javascriptcore/</id>
+    <published>2018-04-21T07:40:35.000Z</published>
+    <updated>2018-04-21T07:59:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近开始涉及 JS 的解析和处理工作，所以专门研究了下这块。特别是动态类型的处理以及不同引擎对于平台无关的字节码的设计和处理会有很大的帮助。</p>
+<h1 id="JavaScriptCore-介绍"><a href="#JavaScriptCore-介绍" class="headerlink" title="JavaScriptCore 介绍"></a>JavaScriptCore 介绍</h1><p>JavaScriptCore 是 JavaScript 引擎，通常会被叫做虚拟机，专门设计来解释和执行 JavaScript 代码。最开始的 JavaScriptCore  是从 KJS（KDE 的 JavaScript 引擎）以及 PCRE 正则表达式的基础上开发的，是基于抽象语法树的解释器。2008 年重写了，叫做 SquirrelFish，后来是 SquirrelFish Extreme，又叫 Nitro。目前 JavaScript 引擎还有 Google 的 V8 ，Mozilla 的 SpiderMonkey。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近开始涉及 JS 的解析和处理工作，所以专门研究了下这块。特别是动态类型的处理以及不同引擎对于平台无关的字节码的设计和处理会有很大的帮助。
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="JavaScript" scheme="http://ming1016.github.io/tags/JavaScript/"/>
+    
+      <category term="Web" scheme="http://ming1016.github.io/tags/Web/"/>
+    
+      <category term="编译" scheme="http://ming1016.github.io/tags/%E7%BC%96%E8%AF%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读 SnapKit 和 Masonry 自动布局框架源码</title>
+    <link href="http://ming1016.github.io/2018/04/07/read-snapkit-and-masonry-source-code/"/>
+    <id>http://ming1016.github.io/2018/04/07/read-snapkit-and-masonry-source-code/</id>
+    <published>2018-04-07T14:14:18.000Z</published>
+    <updated>2018-04-07T14:17:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一直觉得 SnapKit 和 Masonry 这两个框架设计和封装的很好，用起来的体验也是一致的，翻了下它们的源码，对其设计方式和涉及的技术做了下记录。文章打算围绕，给谁做约束？如何设置约束？设置完后如何处理？这三个问题看看 SnapKit 和 Masnory 分别是怎么做的，正好也能够窥探下作者是如何利用 Swift 和 Objective-C 两个不同语言的不同特性做到一致的使用体验的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;一直觉得 SnapKit 和 Masonry 这两个框架设计和封装的很好，用起来的体验也是一致的，翻了下它们的源码，对其设计方式和涉及的技术
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Swift 项目中涉及到 JSONDecoder，网络请求，泛型协议式编程的一些记录和想法</title>
+    <link href="http://ming1016.github.io/2018/04/02/record-and-think-about-swift-project-jsondecoder-networking-and-pop/"/>
+    <id>http://ming1016.github.io/2018/04/02/record-and-think-about-swift-project-jsondecoder-networking-and-pop/</id>
+    <published>2018-04-02T11:12:28.000Z</published>
+    <updated>2018-04-03T01:49:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目开发一直在使用 swift，因为 HTN 项目最近会有另外一位同事加入，所以打算对最近涉及到的一些技术和自己的一些想法做个记录，同时也能够方便同事熟悉代码。</p>
+<h1 id="JSON-数据的处理"><a href="#JSON-数据的处理" class="headerlink" title="JSON 数据的处理"></a>JSON 数据的处理</h1><p>做项目只要是涉及到服务器端接口都没法避免和 JSON 数据打交道。对于来自网络的 JSON 结构化数据的处理，可以使用 JSONDecoder 这个苹果自己提供的字符串转模型类，这个类是在 Swift 4 的 Fundation 模块里提供的，可以在Swift 源码目录 swift/stdlib/public/SDK/Fundation/JSONEncoder.swift 看到苹果对这个类实现。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近项目开发一直在使用 swift，因为 HTN 项目最近会有另外一位同事加入，所以打算对最近涉及到的一些技术和自己的一些想法做个记录，同时
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Why Swift? Generics(泛型), Collection(集合类型), POP(协议式编程), Memory Management(内存管理)</title>
+    <link href="http://ming1016.github.io/2018/01/24/why-swift/"/>
+    <id>http://ming1016.github.io/2018/01/24/why-swift/</id>
+    <published>2018-01-24T09:14:03.000Z</published>
+    <updated>2018-01-25T05:37:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>写这篇文章主要是为了给组内要做的分享准备内容。这段时间几个项目都用到 Swift，在上次 GIAC 大会上就被问到为什么要用 Swift，正好这个主题可以聊聊 Swift 的哪些特性吸引了我。</p>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><p>先来个例子看下泛型是解决什么问题的。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;写这篇文章主要是为了给组内要做的分享准备内容。这段时间几个项目都用到 Swift，在上次 GIAC 大会上就被问到为什么要用 Swift，正
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GIAC 大会上分享的《Swift 将 Web 代码转成60帧满帧原生应用的方案及实践》的幻灯片</title>
+    <link href="http://ming1016.github.io/2018/01/10/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/"/>
+    <id>http://ming1016.github.io/2018/01/10/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/</id>
+    <published>2018-01-10T07:31:54.000Z</published>
+    <updated>2018-01-10T09:14:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/01.png" alt=""><br><img src="/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/02.png" alt=""><br><img src="/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/03.png" alt=""><br><img src="/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/04.png" alt=""><br><img src="/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/05.png" alt=""><br>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/uploads/slides-of-giac-how-to-use-swift-transfer-web-to-60-frame-native-code/01.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;&lt;img src=&quot;/uploads/slides-of-g
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Slides" scheme="http://ming1016.github.io/tags/Slides/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>花野</title>
+    <link href="http://ming1016.github.io/2018/01/04/huaye/"/>
+    <id>http://ming1016.github.io/2018/01/04/huaye/</id>
+    <published>2018-01-04T11:27:32.000Z</published>
+    <updated>2018-01-04T11:31:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/uploads/huaye/01.png" alt=""></p>
+<p>早上七点半闹钟响起，我皱眉闭眼伸手去把床头柜上的闹钟关掉。昨晚睡前看电视剧看多了，我决定再眯一会，意识模糊的又呼呼过去，怎的刚才梦里那蛇又追过来了，眼看要一口要咬到我的大腿了，我居然给吓醒了，呼！算了，反正再睡又要被蛇咬，看看时间，呀，八点了，还有半个小时就要出门上班了，我赶紧起身双脚插上拖鞋双手抓住后面头发扎起辫子，挽起双手袖子赶着弄早点吃，来到厨房发现垃圾老公又忘带出去，都说处女座心细，我怎么瞧不出。</p>
+<p>穿上我的小西装直奔到我们小区门口亿达房产售楼处。</p>
+<p>“小琴，今儿又是掐着点到呢，真羡慕你们住的近的”我隔壁同事王潘凑过来说道。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/uploads/huaye/01.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;早上七点半闹钟响起，我皱眉闭眼伸手去把床头柜上的闹钟关掉。昨晚睡前看电视剧看多了，我决定再眯一会，意识模糊的又呼呼过去，怎的刚才梦里那蛇又追过来了，眼看要一口要咬到我的大腿了，我
+    
+    </summary>
+    
+      <category term="My novel" scheme="http://ming1016.github.io/categories/My-novel/"/>
+    
+    
+      <category term="Novel" scheme="http://ming1016.github.io/tags/Novel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>白芈</title>
+    <link href="http://ming1016.github.io/2018/01/04/baimi/"/>
+    <id>http://ming1016.github.io/2018/01/04/baimi/</id>
+    <published>2018-01-04T11:24:38.000Z</published>
+    <updated>2018-01-04T11:30:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/uploads/baimi/01.png" alt=""></p>
+<p>“你过线了！”我说。</p>
+<p>“过了怎么了！”</p>
+<p>“你这个猪，占这么大的位置！”</p>
+<p>“你个猴，瘦不拉几的，要那么大位置干嘛！”</p>
+<p>类似这样的对话几乎每天都会有，这天更是一发不可收拾。同桌余敏推了我一下，我耐不住心中的烦闷，接着就是一脚朝她肚子踢过去。她连同着椅子一起滑倒到侧对面一排桌子，结果，她哭了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/uploads/baimi/01.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;“你过线了！”我说。&lt;/p&gt;
+&lt;p&gt;“过了怎么了！”&lt;/p&gt;
+&lt;p&gt;“你这个猪，占这么大的位置！”&lt;/p&gt;
+&lt;p&gt;“你个猴，瘦不拉几的，要那么大位置干嘛！”&lt;/p&gt;
+&lt;p&gt;类似这
+    
+    </summary>
+    
+      <category term="My novel" scheme="http://ming1016.github.io/categories/My-novel/"/>
+    
+    
+      <category term="Novel" scheme="http://ming1016.github.io/tags/Novel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在滴滴，我是如何指数级提升开发技术的？</title>
+    <link href="http://ming1016.github.io/2017/10/24/how-do-i-improve-the-development/"/>
+    <id>http://ming1016.github.io/2017/10/24/how-do-i-improve-the-development/</id>
+    <published>2017-10-24T11:16:27.000Z</published>
+    <updated>2017-10-24T11:19:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>如何提升开发技术的方法很多，比如专注，刻苦，热情，兴趣等，不过我这里不会提这些，下面想说的是我觉得能够指数级提升的窍门和一些自己在求索路上的一些体会，也算是一个阶段性的总结吧。趁着今天是程序员节，给大家做个分享，希望对需要的同学有用。</p>
+<h2 id="窍门一，将代码放到-GitHub-上"><a href="#窍门一，将代码放到-GitHub-上" class="headerlink" title="窍门一，将代码放到 GitHub 上"></a>窍门一，将代码放到 GitHub 上</h2>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;如何提升开发技术的方法很多，比如专注，刻苦，热情，兴趣等，不过我这里不会提这些，下面想说的是我觉得能够指数级提升的窍门和一些自己在求索路上的一些体会，也算是一个阶段性的总结吧。趁着今天是程序员节，给大家做个分享，希望对需要的同学有用。&lt;/p&gt;
+&lt;h2 id=&quot;窍门一，将代码
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="Study" scheme="http://ming1016.github.io/tags/Study/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTML 转原生 HTN 项目开发记录</title>
+    <link href="http://ming1016.github.io/2017/10/16/html-to-native-htn-development-record/"/>
+    <id>http://ming1016.github.io/2017/10/16/html-to-native-htn-development-record/</id>
+    <published>2017-10-16T07:49:00.000Z</published>
+    <updated>2017-11-06T06:46:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要是记录 HTN 项目开发的过程。关于这个项目先前在 Swift 开发者大会上我曾经演示过，不过当时项目结构不完善，不易扩展，也没有按照标准来。所以这段时间，我研究了下 W3C 的标准和 WebKit 的一些实现，对于这段时间的研究也写了篇文章<a href="http://www.starming.com/2017/10/11/deeply-analyse-webkit/" target="_blank" rel="external">深入剖析 WebKit</a>。重构了下这个项目，我可以先说下已经完成的部分，最后列下后面的规划。项目已经放到了 Github 上：<a href="https://github.com/ming1016/HTN" target="_blank" rel="external">https://github.com/ming1016/HTN</a> 后面可以对着代码看。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文主要是记录 HTN 项目开发的过程。关于这个项目先前在 Swift 开发者大会上我曾经演示过，不过当时项目结构不完善，不易扩展，也没有按
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+      <category term="Web" scheme="http://ming1016.github.io/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入剖析 WebKit</title>
+    <link href="http://ming1016.github.io/2017/10/11/deeply-analyse-webkit/"/>
+    <id>http://ming1016.github.io/2017/10/11/deeply-analyse-webkit/</id>
+    <published>2017-10-11T03:42:25.000Z</published>
+    <updated>2017-10-23T05:11:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="HTML-标准"><a href="#HTML-标准" class="headerlink" title="HTML 标准"></a>HTML 标准</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
+<li>HTML DOM 树的插入状态规范 <a href="https://html.spec.whatwg.org/multipage/parsing.html#the-insertion-mode" target="_blank" rel="external">https://html.spec.whatwg.org/multipage/parsing.html#the-insertion-mode</a></li>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;HTML-标准&quot;&gt;&lt;a href=&quot;#HTML-标准&quot; class=&quot;headerlink&quot; title=&quot;HTML 标准&quot;&gt;&lt;/a&gt;HTML 标准&lt;/h2&gt;&lt;h3 id=&quot;HTML&quot;&gt;&lt;a href=&quot;#HTML&quot; class=&quot;headerlink&quot; titl
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="Web" scheme="http://ming1016.github.io/tags/Web/"/>
+    
+      <category term="WebKit" scheme="http://ming1016.github.io/tags/WebKit/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入剖析 iOS 性能优化</title>
+    <link href="http://ming1016.github.io/2017/06/20/deeply-ios-performance-optimization/"/>
+    <id>http://ming1016.github.io/2017/06/20/deeply-ios-performance-optimization/</id>
+    <published>2017-06-20T02:25:42.000Z</published>
+    <updated>2017-10-11T03:15:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="问题种类"><a href="#问题种类" class="headerlink" title="问题种类"></a>问题种类</h1><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>在集合里数据量小的情况下时间复杂度对于性能的影响看起来微乎其微。但如果某个开发的功能是一个公共功能，无法预料调用者传入数据的量时，这个复杂度的优化显得非常重要了。<br><img src="/uploads/deeply-ios-performance-optimization/01.png" alt=""><br>上图列出了各种情况的时间复杂度，比如高效的排序算法一般都是 O(n log n)。接下来看看下图：<br><img src="/uploads/deeply-ios-performance-optimization/02.png" alt=""><br>图中可以看出 O(n) 是个分水岭，大于它对于性能就具有很大的潜在影响，如果是个公共的接口一定要加上说明，自己调用也要做到心中有数。当然最好是通过算法优化或者使用合适的系统接口方法，权衡内存消耗争取通过空间来换取时间。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;问题种类&quot;&gt;&lt;a href=&quot;#问题种类&quot; class=&quot;headerlink&quot; title=&quot;问题种类&quot;&gt;&lt;/a&gt;问题种类&lt;/h1&gt;&lt;h2 id=&quot;时间复杂度&quot;&gt;&lt;a href=&quot;#时间复杂度&quot; class=&quot;headerlink&quot; title=&quot;时间复杂度&quot;&gt;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Performance optimization" scheme="http://ming1016.github.io/tags/Performance-optimization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GMTC 上分享滴滴出行 iOS 端瘦身实践的 Slides</title>
+    <link href="http://ming1016.github.io/2017/06/12/gmtc-ios-slimming-practice/"/>
+    <id>http://ming1016.github.io/2017/06/12/gmtc-ios-slimming-practice/</id>
+    <published>2017-06-12T06:15:06.000Z</published>
+    <updated>2017-10-11T03:15:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在这次 GMTC 大会上分享了我们在包大小瘦身实践过程中使用的一些方法和遇到的一些问题，会前也有很多朋友咨询过这方面的问题，相信这些经验对大家会有一些帮助，完整的 Slides 我放到了这里 <a href="http://pan.baidu.com/s/1skPAIID" target="_blank" rel="external">http://pan.baidu.com/s/1skPAIID</a> 这次大会其他讲师的 pdf 在 GMTC 官网已经放出 <a href="http://gmtc.geekbang.org/" target="_blank" rel="external">http://gmtc.geekbang.org/</a></p>
+<p>下面我提出 Slides 的内容</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在这次 GMTC 大会上分享了我们在包大小瘦身实践过程中使用的一些方法和遇到的一些问题，会前也有很多朋友咨询过这方面的问题，相信这些经验对大家会有一些帮助，完整的 Slides 我放到了这里 &lt;a href=&quot;http://pan.baidu.com/s/1skPAIID&quot;
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Slides" scheme="http://ming1016.github.io/tags/Slides/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>atSwift大会上分享《学习iOS编译原理能做哪些有意思的事情》的 Slides</title>
+    <link href="http://ming1016.github.io/2017/05/27/slides-of-learn-what-interesting-things-you-can-do-with-iOS-compilation/"/>
+    <id>http://ming1016.github.io/2017/05/27/slides-of-learn-what-interesting-things-you-can-do-with-iOS-compilation/</id>
+    <published>2017-05-27T09:54:41.000Z</published>
+    <updated>2017-10-11T03:35:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本次 swift 大会上我分享了一个 h5 转 swift 的 demo 还有 llvm backend 相关的知识和应用，分享完后微信，淘宝和 perfect 团队成员都私下表示了对这个主题的兴趣，看来大家对用技术提高效率的决心是一致的。下面是我的 slides ，下载地址是 <a href="https://pan.baidu.com/s/1kVPvPiB" target="_blank" rel="external">https://pan.baidu.com/s/1kVPvPiB</a>。其他嘉宾的 pdf 和 源码在 <a href="https://github.com/atConf/atswift-2017-resources" target="_blank" rel="external">https://github.com/atConf/atswift-2017-resources</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本次 swift 大会上我分享了一个 h5 转 swift 的 demo 还有 llvm backend 相关的知识和应用，分享完后微信，淘宝和 perfect 团队成员都私下表示了对这个主题的兴趣，看来大家对用技术提高效率的决心是一致的。下面是我的 slides ，下载地
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Slides" scheme="http://ming1016.github.io/tags/Slides/"/>
+    
+      <category term="LLVM" scheme="http://ming1016.github.io/tags/LLVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用 Swift 编写的工程代码静态分析命令行工具 smck</title>
+    <link href="http://ming1016.github.io/2017/04/01/build-static-analysis-program-smck-use-swift/"/>
+    <id>http://ming1016.github.io/2017/04/01/build-static-analysis-program-smck-use-swift/</id>
+    <published>2017-04-01T14:00:31.000Z</published>
+    <updated>2017-10-11T03:15:57.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近几周在用 swift 做一个命令行工具 smck 用来对现有 OC 工程的代码做些分析和处理。日后工程切换成 Swift 可以加上对 Swift 工程代码的支持。昨天看到喵神在微博上说他下周要直播 live coding 一个 swift 的命令行工具，传送门： <a href="http://m.quzhiboapp.com/?liveId=391&amp;fromUserId=12049#!/intro/391" target="_blank" rel="external">现场编程 - 用 Swift 创建命令行工具 fengniao-cli Part1</a> ，其实蛮期待。想想跟喵神挺有缘的，最近下了他开发的 iOS 应用 Mail Me，随时能够记录工作和准备讲座时一些灵感，smck 的一些实现还有模块的设计灵感也是通过这个应用随时记录了下来呢，所以也推荐大家使用，真心方便。还有先前 Segmentfault 邀请我这个月31号在他们的直播平台上做个讲座，传送门： <a href="https://segmentfault.com/l/1500000008514518" target="_blank" rel="external">深入剖析 iOS 编译 Clang / LLVM - 戴铭 - SegmentFault 讲堂</a> ，先前写过一篇文章，直播可能更利于演示和详细说明一些细节吧。看来这段时间我要跟喵神做好多类似的事情了。smck 的代码今天已经放到了 Github 上，地址：<a href="https://github.com/ming1016/smck" target="_blank" rel="external">https://github.com/ming1016/smck</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;最近几周在用 swift 做一个命令行工具 smck 用来对现有 OC 工程的代码做些分析和处理。日后工程切换成 Swift 可以加上对 S
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="smck" scheme="http://ming1016.github.io/tags/smck/"/>
+    
+      <category term="Swift" scheme="http://ming1016.github.io/tags/Swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入剖析 iOS 编译 Clang / LLVM 直播的 Slides</title>
+    <link href="http://ming1016.github.io/2017/04/01/slides-of-deeply-analyse-llvm/"/>
+    <id>http://ming1016.github.io/2017/04/01/slides-of-deeply-analyse-llvm/</id>
+    <published>2017-04-01T10:27:46.000Z</published>
+    <updated>2018-01-10T07:32:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这次直播主要是针对上篇文章：<a href="https://github.com/ming1016/study/wiki/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-iOS-%E7%BC%96%E8%AF%91-Clang---LLVM" target="_blank" rel="external">https://github.com/ming1016/study/wiki/深入剖析-iOS-编译-Clang—LLVM</a> 做了些补充，一些不容易用文字表达的知识点做了些详细的说明，同时现场做了些代码和操作的演示。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这次直播主要是针对上篇文章：&lt;a href=&quot;https://github.com/ming1016/study/wiki/%E6%B7%B1%E5%85%A5%E5%89%96%E6%9E%90-iOS-%E7%BC%96%E8%AF%91-Clang---LLVM&quot; t
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="Slides" scheme="http://ming1016.github.io/tags/Slides/"/>
+    
+      <category term="LLVM" scheme="http://ming1016.github.io/tags/LLVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>深入剖析 iOS 编译 Clang / LLVM</title>
+    <link href="http://ming1016.github.io/2017/03/01/deeply-analyse-llvm/"/>
+    <id>http://ming1016.github.io/2017/03/01/deeply-analyse-llvm/</id>
+    <published>2017-03-01T13:58:09.000Z</published>
+    <updated>2017-10-11T03:08:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2000年，伊利诺伊大学厄巴纳－香槟分校（University of Illinois at Urbana-Champaign 简称UIUC）这所享有世界声望的一流公立研究型大学的 Chris Lattner（他的 twitter <a href="https://twitter.com/clattner_llvm" target="_blank" rel="external">@clattner_llvm</a> ） 开发了一个叫作 Low Level Virtual Machine 的编译器开发工具套件，后来涉及范围越来越大，可以用于常规编译器，JIT编译器，汇编器，调试器，静态分析工具等一系列跟编程语言相关的工作，于是就把简称 LLVM 这个简称作为了正式的名字。Chris Lattner 后来又开发了 Clang，使得 LLVM 直接挑战 GCC 的地位。2012年，LLVM 获得美国计算机学会 ACM 的软件系统大奖，和 UNIX，WWW，TCP/IP，Tex，JAVA 等齐名。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;2000年，伊利诺伊大学厄巴纳－香槟分校（University of Illinois at Urbana-Champaign 简称UIUC
+    
+    </summary>
+    
+      <category term="Programming" scheme="http://ming1016.github.io/categories/Programming/"/>
+    
+    
+      <category term="iOS" scheme="http://ming1016.github.io/tags/iOS/"/>
+    
+      <category term="LLVM" scheme="http://ming1016.github.io/tags/LLVM/"/>
+    
+      <category term="Clang" scheme="http://ming1016.github.io/tags/Clang/"/>
+    
+  </entry>
+  
+</feed>

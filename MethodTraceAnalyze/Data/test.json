@@ -1,0 +1,27 @@
+{
+    "key1": "value1",
+    "key2": 22,
+    "key3": {
+        "subKey1": "subValue1",
+        "subKey2": 40,
+        "subKey3":[
+            {
+                "sub1Key1": 10,
+                "sub1Key2":{
+                    "sub3Key1": "sub3Value1",
+                    "sub3Key2": "sub3Value2"
+                }
+            },
+            {
+                "sub1Key1": 11,
+                "sub1Key2": 15
+            }
+        ],
+        "subKey4": [
+            "value1",
+            23,
+            "value2"
+        ],
+        "subKey5": 2
+    }
+}
