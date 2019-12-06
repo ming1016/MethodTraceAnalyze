@@ -38,8 +38,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
 //        TestJSON.testJSON()
 //        TestXML.testXcodeWorkspace()
-//        LaunchJSON.exportAll()
-        TestXcodeproj.testSection()
+        LaunchJSON.exportAll()
+//        TestXcodeproj.testSection()
+//        TestOC().testWorkspace()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

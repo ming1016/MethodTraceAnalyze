@@ -31,6 +31,7 @@
 		3A3823E02393ED2500CB52C0 /* subscriptionSimple.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DD2393ED2500CB52C0 /* subscriptionSimple.xml */; };
 		3A3823E12393ED2500CB52C0 /* contents.xcworkspacedata in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */; };
 		3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DF2393ED2500CB52C0 /* subscription.xml */; };
+		3A9136CC239A774A0073BFAE /* ParseOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9136CB239A774A0073BFAE /* ParseOC.swift */; };
 		3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B5239202F0006A2F48 /* AppDelegate.swift */; };
 		3AED19B8239202F0006A2F48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B7239202F0006A2F48 /* ContentView.swift */; };
 		3AED19BA239202F2006A2F48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AED19B9239202F2006A2F48 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		3A3823DD2393ED2500CB52C0 /* subscriptionSimple.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscriptionSimple.xml; sourceTree = "<group>"; };
 		3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contents.xcworkspacedata; sourceTree = "<group>"; };
 		3A3823DF2393ED2500CB52C0 /* subscription.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscription.xml; sourceTree = "<group>"; };
+		3A9136CB239A774A0073BFAE /* ParseOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOC.swift; sourceTree = "<group>"; };
 		3AED19B2239202F0006A2F48 /* MethodTraceAnalyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MethodTraceAnalyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AED19B5239202F0006A2F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AED19B7239202F0006A2F48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				3A3823C82393E8C600CB52C0 /* ParseOCNodes.swift */,
 				3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */,
 				3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */,
+				3A9136CB239A774A0073BFAE /* ParseOC.swift */,
 				3A3823CC2393E8DD00CB52C0 /* TestOC.swift */,
 			);
 			path = OC;
@@ -209,10 +212,10 @@
 		3AED19B4239202F0006A2F48 /* MethodTraceAnalyze */ = {
 			isa = PBXGroup;
 			children = (
-				3A3823D42393EC5100CB52C0 /* XML */,
 				3A3823C52393E8AB00CB52C0 /* OC */,
 				3A3823B62393E81400CB52C0 /* Xcodeproj */,
 				3A3823AD2393E0EB00CB52C0 /* Launch */,
+				3A3823D42393EC5100CB52C0 /* XML */,
 				3AED1A082392C532006A2F48 /* JSON */,
 				3AED19E9239242C5006A2F48 /* Core */,
 				3AED19E623923987006A2F48 /* Data */,
@@ -456,6 +459,7 @@
 				3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */,
 				3A3823BC2393E84200CB52C0 /* ParseXcodeprojNode.swift in Sources */,
 				3AED1A052392A517006A2F48 /* Lexer.swift in Sources */,
+				3A9136CC239A774A0073BFAE /* ParseOC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

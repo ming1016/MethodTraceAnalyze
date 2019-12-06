@@ -25,17 +25,8 @@ class LaunchJSON {
     // MARK: 生成按时间的树状结构
     public static func tree(preFile: String, file: String = "") {
         // 获取工程方法
-        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
-        var allNodes = [OCNode]()
-        for aPath in allPath {
-            //
-            print(aPath)
-            let ocContent = FileHandle.fileContent(path: aPath)
-            let node = ParseOCNodes(input: ocContent).parse()
-            for aNode in node.subNodes {
-                allNodes.append(aNode)
-            }
-        }
+        let allNodes = ParseOC.ocNodes(workspacePath: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
+        
         var sourceDic = [String:String]()
         for aNode in allNodes {
             sourceDic[aNode.identifier] = aNode.source.replacingOccurrences(of: "\n", with: "</br>").replacingOccurrences(of: " ", with: "&nbsp;")
@@ -156,7 +147,7 @@ class LaunchJSON {
                 let methodId = "[\(className)]\(methodName)"
                 
                 // 判断是否有代码内容
-                let sourceContent = sourceDic[methodId] ?? "hello"
+                let sourceContent = sourceDic[methodId] ?? ""
                 var methodContentClickable = ""
                 var methodClickable = "\(treeSymbol) \(methodId) \(mergeStr)"
                 if sourceContent.count > 0 {

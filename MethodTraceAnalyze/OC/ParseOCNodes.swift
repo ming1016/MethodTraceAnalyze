@@ -11,6 +11,7 @@
 
 import Foundation
 
+// 节点类型
 public enum OCNodeType {
     case `default`
     case root
@@ -19,6 +20,7 @@ public enum OCNodeType {
     case method
 }
 
+// OC 语法树节点
 public struct OCNode {
     public var type: OCNodeType
     public var subNodes: [OCNode]
@@ -48,21 +50,21 @@ public class ParseOCNodes {
     // MARK: 递归解析状态
     private enum RState {
         case normal
-        case eod
-        case methodStart
-        case methodReturnEnd
-        case methodNameEnd
-        case methodParamStart
-        case methodContentStart
-        case methodParamTypeStart
-        case methodParamTypeEnd
-        case methodParamEnd
-        case methodParamNameEnd
+        case eod                   // 换行
+        case methodStart           // 方法开始
+        case methodReturnEnd       // 方法返回类型结束
+        case methodNameEnd         // 方法名结束
+        case methodParamStart      // 方法参数开始
+        case methodContentStart    // 方法内容开始
+        case methodParamTypeStart  // 方法参数类型开始
+        case methodParamTypeEnd    // 方法参数类型结束
+        case methodParamEnd        // 方法参数结束
+        case methodParamNameEnd    // 方法参数名结束
         
-        case at
-        case atImplementation
+        case at                    // @
+        case atImplementation      // @implementation
         
-        case normalBlock
+        case normalBlock           // oc方法外部的 block {}，用于 c方法
     }
     
     // MARK: 递归解析
