@@ -35,7 +35,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        let bundlePath = Bundle.main.path(forResource: "startTrace", ofType: "json")
 //        let jsonPath = bundlePath ?? ""
 //        let jsonContent = FileHandle.fileContent(path: jsonPath)
-        TestJSON.testJSON()
+        
+//        TestJSON.testJSON()
+//        TestXML.testXcodeWorkspace()
+//        LaunchJSON.exportAll()
+        TestXcodeproj.testSection()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -10,10 +10,10 @@ import Foundation
 
 public enum XMLTagNodeType {
     case xml
-    case single
-    case start
-    case value
-    case end
+    case single // 单个标签
+    case start  // 开标签 <p>
+    case value  // 标签的值 <p>value</p>
+    case end    // 闭合的标签 </p>
 }
 
 public struct XMLTagAttribute {
@@ -23,9 +23,9 @@ public struct XMLTagAttribute {
 
 public struct XMLTagNode {
     public let type: XMLTagNodeType
-    public let value: String
-    public let name: String
-    public let attributes: [XMLTagAttribute]
+    public let value: String // 标签值
+    public let name: String  // 标签名
+    public let attributes: [XMLTagAttribute] // 标签属性
 }
 
 public class ParseStandXMLTags {
@@ -75,7 +75,6 @@ public class ParseStandXMLTags {
                 case attributeValue
                 case startForwardSlash
                 case endForwardSlash
-                
                 case startDoubleQuotationMarks
                 case backSlash
                 case endDoubleQuotationMarks

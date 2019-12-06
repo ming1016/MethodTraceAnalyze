@@ -9,9 +9,9 @@
 import Foundation
 
 public struct XcodeprojSourceNode {
-    let fatherValue: String
-    let value: String
-    let name: String
+    let fatherValue: String // 文件夹
+    let value: String // 文件的值
+    let name: String // 文件名
     let type: String
 }
 
@@ -19,7 +19,6 @@ public struct XcodeprojSourceNode {
 public class ParseXcodeprojSource {
     var proj: Xcodeproj
     var projPath: String
-    
     
     public init(input: String) {
         let projectContent = FileHandle.fileContent(path: input)
@@ -47,10 +46,6 @@ public class ParseXcodeprojSource {
             for child in v.children {
                 // 如果满足条件表示是目录
                 if proj.pbxGroup.keys.contains(child.value) {
-//                    guard let group = proj.pbxGroup[child.value] else {
-//                        continue
-//                    }
-//                    nodes.append(XcodeprojSourceNode(fatherValue: k, value: child.value, name: group.path, type: "folder"))
                     continue
                 }
                 // 满足条件是文件

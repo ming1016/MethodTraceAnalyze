@@ -25,7 +25,7 @@ class LaunchJSON {
     // MARK: 生成按时间的树状结构
     public static func tree(preFile: String, file: String = "") {
         // 获取工程方法
-        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: "")
+        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
         var allNodes = [OCNode]()
         for aPath in allPath {
             //
@@ -43,13 +43,11 @@ class LaunchJSON {
         
         // 获取启动时的方法
         
-        let bundleOwner = LaunchJSON.parseBundleOwner()
+//        let bundleOwner = LaunchJSON.parseBundleOwner()
+        let bundleOwner = [String:(String,String)]()
         // 取前版本全部的
         let preAllItem = LaunchJSON.launchJSON(fileName: preFile)
         var currentT = 0
-        
-        // 取最新版本全部的
-
         
         // 取全部
         let preAllMergeItem = LaunchJSON.allMethodAndSubMethods(fileName: preFile)
@@ -84,7 +82,7 @@ class LaunchJSON {
                 // 获取 bundle、类名、方法名信息
                 let (bundleName,className,methodName) = LaunchJSON.bundleAndClassFromName(name: aItem.name)
                 
-                // 获取 T1 到 T5 阶段信息
+                // 获取 T1 到 T5 阶段信息，其中 updateLauncherState 函数名需要替换成自己阶段切换的函数名，最多5个阶段
                 if methodName == "updateLauncherState:" {
                     currentT += 1
                     if currentT > 5 {
@@ -158,7 +156,7 @@ class LaunchJSON {
                 let methodId = "[\(className)]\(methodName)"
                 
                 // 判断是否有代码内容
-                let sourceContent = sourceDic[methodId] ?? ""
+                let sourceContent = sourceDic[methodId] ?? "hello"
                 var methodContentClickable = ""
                 var methodClickable = "\(treeSymbol) \(methodId) \(mergeStr)"
                 if sourceContent.count > 0 {
@@ -259,28 +257,14 @@ function sourceShowHidden(sourceIdName) {
         let allItems = LaunchJSON.leaf(fileName: fileName, isGetAllItem: true)
         
         var mergeDic = [String:LaunchItem]()
-        for var item in allItems {
-            let mergeKey = item.name + item.ph
+        for item in allItems {
+            let mergeKey = item.name // 方法名为标识
             if mergeDic[mergeKey] != nil {
                 var newItem = mergeDic[mergeKey]
-                newItem?.cost += item.cost
-                newItem?.times += 1
-                guard var subCost = Int(newItem?.ts ?? "0") else { continue }
-                if item.subItem.count > 0 {
-                    for sub in item.subItem {
-                        subCost += sub.cost
-                    }
-                }
-                newItem?.ts = "\(subCost)"
+                newItem?.cost += item.cost // 累加耗时
+                newItem?.times += 1 // 累加次数
                 mergeDic[mergeKey] = newItem
             } else {
-                var subCost = 0
-                if item.subItem.count > 0 {
-                    for sub in item.subItem {
-                        subCost += sub.cost
-                    }
-                }
-                item.ts = "\(subCost)"
                 mergeDic[mergeKey] = item
             }
         }
@@ -311,7 +295,7 @@ function sourceShowHidden(sourceIdName) {
     
  
     
-    public static func launchJSON(fileName:String = "trace_T31019mini") -> LaunchItem {
+    public static func launchJSON(fileName:String) -> LaunchItem {
         
         let jsonOPath = Bundle.main.path(forResource: fileName, ofType: "json")
         let jOrgPath = jsonOPath ?? ""

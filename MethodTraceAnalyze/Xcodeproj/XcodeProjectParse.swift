@@ -18,6 +18,9 @@ public class XcodeProjectParse {
         let pathStr = pathArr.joined(separator: "/")
         
         let allFiles = FileHandle.allFilePath(path: path)
+        if allFiles.count == 0 {
+            return [String]()
+        }
         
         var allSourceFile = [String]() // 获取的所有源文件路径
         
@@ -38,7 +41,6 @@ public class XcodeProjectParse {
                     } else {
                         projectPath = "/\(pathStr)/\(fileRefPath)/project.pbxproj"
                     }
-//                    print(projectPath)
                     // 读取 project 文件内容分析
                     
                     allSourceFile += ParseXcodeprojSource(input: projectPath).parseAllFiles()
@@ -53,12 +55,6 @@ public class XcodeProjectParse {
         return allSourceFile
 
     } // end for
-    
-    public static func parseXcodeprojAllFile(path:String) -> [String] {
-        
-        return ParseXcodeprojSource(input: path).parseAllFiles()
-
-    }
     
     
 }

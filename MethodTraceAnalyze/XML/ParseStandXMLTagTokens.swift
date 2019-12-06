@@ -94,7 +94,7 @@ public class ParseStandXMLTagTokens {
             return
         }
         
-        // <tagname ...>
+        // <tagname ...> 和 <![CDATA[
         if currentState == .normal && currentToken == .id("<") {
             // <![CDATA[
             if peekTk() == .id("!") && peekTkStep(step: 2) == .id("[") && peekTkStep(step: 3) == .id("CDATA") && peekTkStep(step: 4) == .id("[") {
@@ -107,7 +107,7 @@ public class ParseStandXMLTagTokens {
                 return
             }
             
-            // 正常
+            // <tagname …>
             if currentTokens.count > 0 {
                 addTagTokens(type: .value) // 结束一组
             }

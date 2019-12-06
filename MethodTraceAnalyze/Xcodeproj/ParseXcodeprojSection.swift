@@ -12,7 +12,7 @@ import Foundation
 public struct Xcodeproj {
     var archiveVersion = ""
     var classes = [XcodeprojTreeNodeArrayValue]()
-    var objectVersion = ""
+    var objectVersion = "" // 区分 xcodeproj 不同协议版本
     var rootObject = PBXValueWithComment(name: "", value: "")
     
     var pbxBuildFile = [String:PBXBuildFile]()
@@ -40,21 +40,21 @@ public struct PBXValueWithComment {
 }
 
 // ------- Objects ---------
-// 源码文件
+// 文件，最终会关联到 PBXFileReference
 public struct PBXBuildFile {
     var file = "" // 注释中文件名
     var fileRef = "" // 3AF0A7C8231E61B30080E07C
 }
 
+// 部署的元素
 public struct PBXContainerItemProxy {
     var containerPortal = "" // Project object
     var proxyType = "" // 1
     var remoteGlobalIDString = "" // 3AF0A7C0231E61B30080E07C
     var remoteInfo = "" // SampleProject
-
 }
 
-// 各类文件（全）
+// 各类文件，有源码、资源、库等文件
 public struct PBXFileReference {
     var explicitFileType = "" // wrapper.application、wrapper.cfbundle
     var includeInIndex = "" // 0
@@ -62,10 +62,9 @@ public struct PBXFileReference {
     var sourceTree = "" // "<group>"、BUILT_PRODUCTS_DIR
     
     var lastKnownFileType = "" // sourcecode.c.objc
-    
 }
 
-
+// 用于 framework 的构建
 public struct PBXFrameworksBuildPhase {
     var buildActionMask = "" // 2147483647
     var files = [PBXValueWithComment]()
@@ -73,7 +72,7 @@ public struct PBXFrameworksBuildPhase {
     
 }
 
-// 文件夹
+// 文件夹，可嵌套，里面包含了文件与文件夹的关系
 public struct PBXGroup {
     var children = [PBXValueWithComment]() // 3AF0A7C3231E61B30080E07C /* SampleProject */
     var sourceTree = "" // "<group>"
@@ -93,7 +92,7 @@ public struct PBXNativeTarget {
     var productType = "" // "com.apple.product-type.application"
 }
 
-// Project 的设置
+// Project 的设置，有编译工程所需信息
 public struct PBXProject {
     var attributes = [XcodeprojTreeNodeKv]() // 暂时不用
     var buildConfigurationList = PBXValueWithComment(name: "", value: "") // 3AF0A7BC231E61B30080E07C /* Build configuration list for PBXProject "SampleProject" */
@@ -109,7 +108,7 @@ public struct PBXProject {
     
 }
 
-// 编译资源文件
+// 编译资源文件，有 xib、storyboard、plist以及图片等资源文件
 public struct PBXResourcesBuildPhase {
     var buildActionMask = "" // 2147483647
     var files = [PBXValueWithComment]() // 3AF0A7D1231E61B50080E07C /* LaunchScreen.storyboard in Resources */
@@ -123,19 +122,20 @@ public struct PBXSourcesBuildPhase {
     var runOnlyForDeploymentPostprocessing = "" // 0
 }
 
+// Taget 的依赖
 public struct PBXTargetDependency {
     var target = PBXValueWithComment(name: "", value: "") // 3AF0A7C0231E61B30080E07C /* SampleProject */
     var targetProxy = PBXValueWithComment(name: "", value: "") // 3AF0A7DA231E61B50080E07C /* PBXContainerItemProxy */
 }
 
-// .storyboard
+// .storyboard 文件
 public struct PBXVariantGroup {
     var children = [PBXValueWithComment]() // 3AF0A7CB231E61B30080E07C /* Base */
     var name = "" // Main.storyboard
     var sourceTree = "" // "<group>"
 }
 
-// Xcode 编译配置
+// Xcode 编译配置，对应 Xcode 的 Build Setting 面板内容
 public struct XCBuildConfiguration {
     var name = "" // Debug
     
@@ -211,6 +211,7 @@ public struct XCBuildConfiguration {
     
 }
 
+// 构建配置相关，包含项目文件和 target 文件
 public struct XCConfigurationList {
     var buildConfigurations = [PBXValueWithComment]()
     var defaultConfigurationIsVisible = ""

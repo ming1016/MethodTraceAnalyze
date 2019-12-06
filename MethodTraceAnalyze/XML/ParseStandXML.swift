@@ -55,13 +55,15 @@ public class ParseStandXML {
                 continue
             }
             // 以下顺序不可变
+            // 当遇到.end 类型时将一组 XMLTagNode 加到 tagNodeArrs 里。然后重置。
             if node.type == .end && node.name == currentTagName {
                 currentState = .end
                 currentTagNodeArr.append(node)
                 // 添加到一级
                 tagNodeArrs.append(currentTagNodeArr)
+                // 重置
                 currentTagNodeArr = [XMLTagNode]()
-                // 当前标签名重置
+                currentTagName = ""
                 continue
             }
             if currentState == .start {
