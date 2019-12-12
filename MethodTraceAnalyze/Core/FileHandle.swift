@@ -41,7 +41,7 @@ public class FileHandle {
     
     // 保存文件到下载目录
     public static func writeToDownload(fileName: String, content: String) {
-        try! content.write(toFile: "/Users/ming/Downloads/\(fileName)", atomically: true, encoding: String.Encoding.utf8)
+        try! content.write(toFile: "\(Config.downloadPath.rawValue)\(fileName)", atomically: true, encoding: String.Encoding.utf8)
     }
 }
 

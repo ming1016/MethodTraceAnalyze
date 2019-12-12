@@ -187,7 +187,7 @@ public class ParseLaunchJSON {
         for (k,v) in classBundleDic {
             str.append("\(k),\(v)\n")
         }
-        try! str.write(toFile: "/Users/ming/Downloads/classBundle1015.csv", atomically: true, encoding: String.Encoding.utf8)
+        try! str.write(toFile: "\(Config.downloadPath.rawValue)classBundle1015.csv", atomically: true, encoding: String.Encoding.utf8)
     }
     
 }

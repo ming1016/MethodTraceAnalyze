@@ -11,49 +11,9 @@ import Foundation
 public class TestOC: Test {
     
     public func testWorkspace() {
-//        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
         
-        let allNodes = ParseOC.ocNodes(workspacePath: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
-        
-//        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: "")
-//
-//        var allNodes = [OCNode]()
-//
-//        let groupCount = 64 // 一组容纳个数
-//        let groupTotal = allPath.count/groupCount + 1
-//
-//        var groups = [[String]]()
-//        for i in 0..<groupTotal {
-//            var group = [String]()
-//            for j in i*groupCount..<(i+1)*groupCount {
-//                if j < allPath.count {
-//                    group.append(allPath[j])
-//                }
-//            }
-//            if group.count > 0 {
-//                groups.append(group)
-//            }
-//        }
-//
-//        for group in groups {
-//            let dispatchGroup = DispatchGroup()
-//
-//            for node in group {
-//                dispatchGroup.enter()
-//                let queue = DispatchQueue.global()
-//                queue.async {
-//                    let ocContent = FileHandle.fileContent(path: node)
-//                    let node = ParseOCNodes(input: ocContent).parse()
-//                    for aNode in node.subNodes {
-//                        allNodes.append(aNode)
-//                    }
-//                    dispatchGroup.leave()
-//
-//                } // end queue async
-//            } // end for
-//            dispatchGroup.wait()
-//        }
-//
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.gcdFeedPath.rawValue)
+  
         var saveStr = ""
         for aNode in allNodes {
             saveStr += "//\(aNode.identifier)\n---\n\(aNode.source)\n\n"

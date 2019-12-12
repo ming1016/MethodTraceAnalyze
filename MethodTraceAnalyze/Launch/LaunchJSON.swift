@@ -25,7 +25,7 @@ class LaunchJSON {
     // MARK: 生成按时间的树状结构
     public static func tree(preFile: String, file: String = "") {
         // 获取工程方法
-        let allNodes = ParseOC.ocNodes(workspacePath: "/Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace")
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.gcdFeedPath.rawValue)
         
         var sourceDic = [String:String]()
         for aNode in allNodes {
@@ -281,7 +281,7 @@ function sourceShowHidden(sourceIdName) {
    
     
     public static func writeToCsv(content:String, fileName:String, suffix:String = "csv") {
-        try! content.write(toFile: "/Users/ming/Downloads/\(fileName).\(suffix)", atomically: true, encoding: String.Encoding.utf8)
+        try! content.write(toFile: "\(Config.downloadPath.rawValue)\(fileName).\(suffix)", atomically: true, encoding: String.Encoding.utf8)
     }
     
  
