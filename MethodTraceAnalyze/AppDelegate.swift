@@ -41,6 +41,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         LaunchJSON.exportAll()
 //        TestXcodeproj.testSection()
 //        TestOC().testWorkspace()
+//        TestOC.testM(filePath: Config.aMFilePath.rawValue)
+//        TestOC.testOC()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

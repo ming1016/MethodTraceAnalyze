@@ -12,7 +12,7 @@ public class TestOC: Test {
     
     public func testWorkspace() {
         
-        let allNodes = ParseOC.ocNodes(workspacePath: Config.gcdFeedPath.rawValue)
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
   
         var saveStr = ""
         for aNode in allNodes {
@@ -30,8 +30,8 @@ public class TestOC: Test {
         
     }
     
-    public static func testM() {
-        let mContent = FileHandle.fileContent(path: "")
+    public static func testM(filePath:String) {
+        let mContent = FileHandle.fileContent(path: filePath)
         let node = ParseOCNodes(input: mContent).parse()
         var saveStr = ""
         for aNode in node.subNodes {

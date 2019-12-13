@@ -17,7 +17,7 @@ class LaunchJSON {
     
     // MARK: 整体输出
     public static func exportAll() {
-        let fileName = "startTrace"
+        let fileName = Config.traceJSON.rawValue
         LaunchJSON.tree(preFile: fileName)
         
     }
@@ -25,7 +25,7 @@ class LaunchJSON {
     // MARK: 生成按时间的树状结构
     public static func tree(preFile: String, file: String = "") {
         // 获取工程方法
-        let allNodes = ParseOC.ocNodes(workspacePath: Config.gcdFeedPath.rawValue)
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
         
         var sourceDic = [String:String]()
         for aNode in allNodes {
@@ -59,9 +59,6 @@ class LaunchJSON {
                 if aItem.cost/1000 < 10 {
                     isOutput = false
                 }
-//                if aItem.cost/1000 < 10 && level != 0 {
-//                    isOutput = false
-//                }
                 
                 var treeSymbol = ""
                 for i in 0..<level + 1 {

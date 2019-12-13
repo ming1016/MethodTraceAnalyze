@@ -32,6 +32,7 @@
 		3A3823E12393ED2500CB52C0 /* contents.xcworkspacedata in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */; };
 		3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DF2393ED2500CB52C0 /* subscription.xml */; };
 		3A708A2423A09CE6000C0D03 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A708A2323A09CE6000C0D03 /* Config.swift */; };
+		3A708A2623A26224000C0D03 /* trace_15s1114.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A708A2523A26224000C0D03 /* trace_15s1114.json */; };
 		3A9136CC239A774A0073BFAE /* ParseOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9136CB239A774A0073BFAE /* ParseOC.swift */; };
 		3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B5239202F0006A2F48 /* AppDelegate.swift */; };
 		3AED19B8239202F0006A2F48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B7239202F0006A2F48 /* ContentView.swift */; };
@@ -94,6 +95,7 @@
 		3A3823DE2393ED2500CB52C0 /* contents.xcworkspacedata */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = contents.xcworkspacedata; sourceTree = "<group>"; };
 		3A3823DF2393ED2500CB52C0 /* subscription.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscription.xml; sourceTree = "<group>"; };
 		3A708A2323A09CE6000C0D03 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		3A708A2523A26224000C0D03 /* trace_15s1114.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trace_15s1114.json; sourceTree = "<group>"; };
 		3A9136CB239A774A0073BFAE /* ParseOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOC.swift; sourceTree = "<group>"; };
 		3AED19B2239202F0006A2F48 /* MethodTraceAnalyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MethodTraceAnalyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AED19B5239202F0006A2F48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 		3AED19E623923987006A2F48 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3A708A2523A26224000C0D03 /* trace_15s1114.json */,
 				3A3823CE2393E8F100CB52C0 /* AppDelegate.txt */,
 				3A3823AB2393B8C600CB52C0 /* test.json */,
 				3A3823C32393E88600CB52C0 /* project.pbxproj */,
@@ -413,6 +416,7 @@
 				3A3823AC2393B8C600CB52C0 /* test.json in Resources */,
 				3A3823C42393E88600CB52C0 /* project.pbxproj in Resources */,
 				3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */,
+				3A708A2623A26224000C0D03 /* trace_15s1114.json in Resources */,
 				3A3823E12393ED2500CB52C0 /* contents.xcworkspacedata in Resources */,
 				3A3823E02393ED2500CB52C0 /* subscriptionSimple.xml in Resources */,
 				3A3823CF2393E8F100CB52C0 /* AppDelegate.txt in Resources */,

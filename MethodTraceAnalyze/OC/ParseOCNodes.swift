@@ -63,6 +63,8 @@ public class ParseOCNodes {
         
         case at                    // @
         case atImplementation      // @implementation
+        case atProtocol            // @protocol
+        case atInterface           // @interface
         
         case normalBlock           // oc方法外部的 block {}，用于 c方法
     }
@@ -201,11 +203,28 @@ public class ParseOCNodes {
                 continue
             }
             
+            // @protocol || @interface
+            if currentState == .atProtocol || currentState == .atInterface {
+                if tkNode.value == "@" {
+                    currentState = .at
+                }
+                continue
+            }
+            
             // @符号的处理
             if currentState == .at {
                 if tkNode.value == "implementation" {
                     currentState = .atImplementation
                     continue
+                } else if tkNode.value == "protocol" {
+                    currentState = .atProtocol
+                    continue
+                } else if tkNode.value == "interface" {
+                    currentState = .atInterface
+                    continue
+                } else {
+                    // 其它情况比如 @synthesize 的处理
+                    currentState = .normal
                 }
                 continue
             }
@@ -233,7 +252,7 @@ public class ParseOCNodes {
                     currentStartLine = tkNode.line
                     continue
                 }
-                if tkNode.type == .identifier && tkNode.value == "@" {
+                if tkNode.value == "@" {
                     currentState = .at
                     continue
                 }

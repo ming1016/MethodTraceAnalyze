@@ -18,12 +18,21 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 
+@protocol SMTraceProtocol <NSObject>
+
++ (id)startTrace;
+
+- (void)getTraceId:(NSString *)key complete:(completeBlock)block;
+
+@end
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+@synthesize data = _data;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
