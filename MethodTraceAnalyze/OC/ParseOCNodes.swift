@@ -36,8 +36,9 @@ public class ParseOCNodes {
     
     // MARK: 初始化
     public init(input: String) {
-        linesContent = input.components(separatedBy: .newlines)
-        tokenNodes = ParseOCTokens(input: input).parse()
+        let formatInput = input.replacingOccurrences(of: "\r\n", with: "\n")
+        linesContent = formatInput.components(separatedBy: .newlines)
+        tokenNodes = ParseOCTokens(input: formatInput).parse()
     }
     
     public func parse() -> OCNode {
@@ -60,11 +61,13 @@ public class ParseOCNodes {
         case methodParamTypeEnd    // 方法参数类型结束
         case methodParamEnd        // 方法参数结束
         case methodParamNameEnd    // 方法参数名结束
+        case methodShouldEnd       // 针对方法定义的情况 比如 interface 里的 - (void)foo;
         
         case at                    // @
         case atImplementation      // @implementation
         case atProtocol            // @protocol
         case atInterface           // @interface
+        case atProperty            // @property
         
         case normalBlock           // oc方法外部的 block {}，用于 c方法
     }
@@ -81,8 +84,19 @@ public class ParseOCNodes {
         // method
         var currentMethodName = ""
         var currentClassName = ""
-        
         for tkNode in nodes {
+            if currentState == .methodShouldEnd {
+                if tkNode.value == "{" {
+                    currentState = .methodContentStart
+                    currentPairCount += 1
+                    continue
+                } else if (tkNode.type == .eod || tkNode.value == ";") {
+                    
+                } else {
+                    currentState = .normal
+                }
+                continue
+            }
             
             if currentState == .methodContentStart {
                 //
@@ -118,9 +132,12 @@ public class ParseOCNodes {
                     currentState = .methodContentStart
                     currentPairCount += 1
                     continue
-                } else if (tkNode.type == .eod || tkNode.value == ";") {
+                } else if tkNode.type == .eod {
                     continue
-                } else {
+                } else if tkNode.value == ";" {
+                    currentState = .methodShouldEnd
+                    continue
+                }else {
                     // -(Bool)foo:(Bool)p p2:(Bool)p2
                     currentMethodName += tkNode.value
                     currentState = .methodParamStart // 可以重用第一个参数状态
@@ -165,7 +182,11 @@ public class ParseOCNodes {
                     currentPairCount += 1
                     continue
                 }
-                if tkNode.type == .eod || tkNode.value == ";" {
+                if tkNode.type == .eod {
+                    continue
+                }
+                if tkNode.value == ";" {
+                    currentState = .methodShouldEnd
                     continue
                 }
                 continue
@@ -213,6 +234,7 @@ public class ParseOCNodes {
             
             // @符号的处理
             if currentState == .at {
+                
                 if tkNode.value == "implementation" {
                     currentState = .atImplementation
                     continue

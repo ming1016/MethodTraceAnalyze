@@ -228,8 +228,14 @@ tfoot {
 </table>
 <script>
 function sourceShowHidden(sourceIdName) {
+
     var sourceCode = document.getElementById(sourceIdName);
-    sourceCode.style.display = "block";
+    if (sourceCode.style.display == "block") {
+        sourceCode.style.display = "none";
+    } else {
+        sourceCode.style.display = "block";
+    }
+    
 }
 </script>
 </body>

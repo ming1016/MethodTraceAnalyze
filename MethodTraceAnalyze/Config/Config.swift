@@ -13,7 +13,7 @@ public enum Config: String {
     // /Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace
     case workPath = ""
     //
-    case aMFilePath = "a"
+    case aMFilePath = ""
     // startTrace、trace_15s1114
     case traceJSON = "startTrace"
   

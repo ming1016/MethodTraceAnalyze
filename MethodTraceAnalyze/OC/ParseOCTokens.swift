@@ -59,6 +59,10 @@ public class ParseOCTokens {
         while currentToken != .eof {
             parseNext()
         }
+//        for node in ocTkNodes {
+//            print(node.line)
+//            print(node.value)
+//        }
         return ocTkNodes
     }
     
