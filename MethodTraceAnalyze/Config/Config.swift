@@ -11,12 +11,11 @@ import Foundation
 public enum Config: String {
     case downloadPath = "/Users/ming/Downloads/"
     // /Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace
-    case workPath = ""
+    case workPath = "workPath"
     //
-    case aMFilePath = ""
+    case aMFilePath = "aMFilePath"
     // startTrace、trace_15s1114
     case traceJSON = "startTrace"
-  
 }
 
 

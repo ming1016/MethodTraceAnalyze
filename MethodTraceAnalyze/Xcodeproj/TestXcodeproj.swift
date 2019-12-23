@@ -65,7 +65,7 @@ public class TestXcodeproj:Test {
             if k == "3AF0A7EA231E61B50080E07C" {
                 cs(current: v.lastKnownFileType, expect: "text.plist.xml", des: "3AF0A7EA231E61B50080E07C lastKnownFileType")
                 cs(current: v.path, expect: "Info.plist", des: "3AF0A7EA231E61B50080E07C path")
-                cs(current: v.sourceTree, expect: "\"<group>\"", des: "3AF0A7EA231E61B50080E07C sourceTree")
+                cs(current: v.sourceTree, expect: "<group>", des: "3AF0A7EA231E61B50080E07C sourceTree")
             }
         } // end for
         
@@ -92,7 +92,7 @@ public class TestXcodeproj:Test {
  SampleProject 3AF0A7C3231E61B30080E07C SampleProjectTests 3AF0A7DC231E61B50080E07C SampleProjectUITests 3AF0A7E7231E61B50080E07C Products 3AF0A7C2231E61B30080E07C
 """
                 cs(current: childrenString, expect: expectString, des: "3AF0A7B8231E61B30080E07C children")
-                cs(current: v.sourceTree, expect: "\"<group>\"", des: "3AF0A7B8231E61B30080E07C sourceTree")
+                cs(current: v.sourceTree, expect: "<group>", des: "3AF0A7B8231E61B30080E07C sourceTree")
             }
             if k == "3AF0A7E7231E61B50080E07C" {
                 var childrenString = ""
@@ -103,7 +103,7 @@ public class TestXcodeproj:Test {
  SampleProjectUITests.m 3AF0A7E8231E61B50080E07C Info.plist 3AF0A7EA231E61B50080E07C
 """
                 cs(current: childrenString, expect: expectString, des: "3AF0A7E7231E61B50080E07C children")
-                cs(current: v.sourceTree, expect: "\"<group>\"", des: "3AF0A7E7231E61B50080E07C sourceTree")
+                cs(current: v.sourceTree, expect: "<group>", des: "3AF0A7E7231E61B50080E07C sourceTree")
                 print(childrenString)
             } // end if
         } // end for
@@ -123,7 +123,7 @@ public class TestXcodeproj:Test {
                 cs(current: v.name, expect: "SampleProject", des: "3AF0A7C0231E61B30080E07C name")
                 cs(current: v.productName, expect: "SampleProject", des: "3AF0A7C0231E61B30080E07C productName")
                 cs(current: v.productReference.value, expect: "3AF0A7C1231E61B30080E07C", des: "3AF0A7C0231E61B30080E07C productReference.value")
-                cs(current: v.productType, expect: "\"com.apple.product-type.application\"", des: "3AF0A7C0231E61B30080E07C productType")
+                cs(current: v.productType, expect: "com.apple.product-type.application", des: "3AF0A7C0231E61B30080E07C productType")
             } // end if
         } // end for
         
@@ -131,7 +131,7 @@ public class TestXcodeproj:Test {
         for (k,v) in proj.pbxProject {
             if k == "3AF0A7B9231E61B30080E07C" {
                 cs(current: v.buildConfigurationList.value, expect: "3AF0A7BC231E61B30080E07C", des: "3AF0A7B9231E61B30080E07C buildConfigurationList.value")
-                cs(current: v.compatibilityVersion, expect: "\"Xcode 9.3\"", des: "3AF0A7B9231E61B30080E07C compatibilityVersion")
+                cs(current: v.compatibilityVersion, expect: "Xcode 9.3", des: "3AF0A7B9231E61B30080E07C compatibilityVersion")
                 cs(current: v.developmentRegion, expect: "en", des: "3AF0A7B9231E61B30080E07C developmentRegion")
                 cs(current: v.hasScannedForEncodings, expect: "0", des: "3AF0A7B9231E61B30080E07C hasScannedForEncodings")
                 
@@ -203,7 +203,7 @@ public class TestXcodeproj:Test {
                 let expectCString = "3AF0A7CB231E61B30080E07C Base "
                 cs(current: cString, expect: expectCString, des: "3AF0A7CA231E61B30080E07C children")
                 cs(current: v.name, expect: "Main.storyboard", des: "3AF0A7CA231E61B30080E07C name")
-                cs(current: v.sourceTree, expect: "\"<group>\"", des: "3AF0A7CA231E61B30080E07C sourceTree")
+                cs(current: v.sourceTree, expect: "<group>", des: "3AF0A7CA231E61B30080E07C sourceTree")
             }
             if k == "3AF0A7CF231E61B50080E07C" {
                 var cString = ""
@@ -213,7 +213,7 @@ public class TestXcodeproj:Test {
                 let expectCString = "3AF0A7D0231E61B50080E07C Base "
                 cs(current: cString, expect: expectCString, des: "3AF0A7CF231E61B50080E07C children")
                 cs(current: v.name, expect: "LaunchScreen.storyboard", des: "3AF0A7CF231E61B50080E07C name")
-                cs(current: v.sourceTree, expect: "\"<group>\"", des: "3AF0A7CF231E61B50080E07C sourceTree")
+                cs(current: v.sourceTree, expect: "<group>", des: "3AF0A7CF231E61B50080E07C sourceTree")
             } // end if
         } // end for
         
@@ -223,8 +223,8 @@ public class TestXcodeproj:Test {
                 cs(current: v.alwaysSearchUserPaths, expect: "NO", des: "3AF0A7EB231E61B50080E07C alwaysSearchUserPaths")
                 cs(current: v.clangAnalyzerNonnull, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangAnalyzerNonnull")
                 cs(current: v.clangAnalyzerNumberObjectConversion, expect: "YES_AGGRESSIVE", des: "3AF0A7EB231E61B50080E07C clangAnalyzerNumberObjectConversion")
-                cs(current: v.clangCxxLanguageStandard, expect: "\"gnu++14\"", des: "3AF0A7EB231E61B50080E07C clangCxxLanguageStandard")
-                cs(current: v.clangCxxLibrary, expect: "\"libc++\"", des: "3AF0A7EB231E61B50080E07C clangCxxLibrary")
+                cs(current: v.clangCxxLanguageStandard, expect: "gnu++14", des: "3AF0A7EB231E61B50080E07C clangCxxLanguageStandard")
+                cs(current: v.clangCxxLibrary, expect: "libc++", des: "3AF0A7EB231E61B50080E07C clangCxxLibrary")
                 cs(current: v.clangEnableModules, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangEnableModules")
                 cs(current: v.clangEnableObjcArc, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangEnableObjcArc")
                 cs(current: v.clangEnableObjcWeak, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangEnableObjcWeak")
@@ -248,7 +248,7 @@ public class TestXcodeproj:Test {
                 cs(current: v.clangWarnSuspiciousMove, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangWarnSuspiciousMove")
                 cs(current: v.clangWarnUnguardedAvailability, expect: "YES_AGGRESSIVE", des: "3AF0A7EB231E61B50080E07C clangWarnUnguardedAvailability")
                 cs(current: v.clangWarnDuplicateMethodMatch, expect: "YES", des: "3AF0A7EB231E61B50080E07C clangWarnDuplicateMethodMatch")
-                cs(current: v.codeSignIdentity, expect: "\"iPhone Developer\"", des: "3AF0A7EB231E61B50080E07C codeSignIdentity")
+                cs(current: v.codeSignIdentity, expect: "iPhone Developer", des: "3AF0A7EB231E61B50080E07C codeSignIdentity")
                 cs(current: v.copyPhaseStrip, expect: "NO", des: "3AF0A7EB231E61B50080E07C copyPhaseStrip")
                 cs(current: v.debugInformationFormat, expect: "dwarf", des: "3AF0A7EB231E61B50080E07C debugInformationFormat")
                 cs(current: v.enableStrictObjcMsgsend, expect: "YES", des: "3AF0A7EB231E61B50080E07C enableStrictObjcMsgsend")
@@ -261,7 +261,7 @@ public class TestXcodeproj:Test {
                 for gpd in v.gccPreprocessorDefinitions {
                     gpdString.append("\(gpd.value)")
                 }
-                let expectGpdString = "\"DEBUG=1\"\"$(inherited)\""
+                let expectGpdString = "DEBUG=1$(inherited)"
                 cs(current: gpdString, expect: expectGpdString, des: "3AF0A7EB231E61B50080E07C gccPreprocessorDefinitions")
                 cs(current: v.gccWarn64To32BitConversion, expect: "YES", des: "3AF0A7EB231E61B50080E07C gccWarn64To32BitConversion")
                 cs(current: v.gccWarnAboutReturnType, expect: "YES_ERROR", des: "3AF0A7EB231E61B50080E07C gccWarnAboutReturnType")
@@ -283,11 +283,11 @@ public class TestXcodeproj:Test {
                 for lrsp in v.ldRunPathSearchPath {
                     lrspString.append("\(lrsp.value)")
                 }
-                let expectLrspString = "\"$(inherited)\"\"@executable_path/Frameworks\"\"@loader_path/Frameworks\""
+                let expectLrspString = "$(inherited)@executable_path/Frameworks@loader_path/Frameworks"
                 cs(current: lrspString, expect: expectLrspString, des: "3AF0A7F5231E61B50080E07C ldRunPathSearchPath")
                 cs(current: v.productBundleIdentifier, expect: "com.starming.SampleProjectUITests", des: "3AF0A7F5231E61B50080E07C productBundleIdentifier")
-                cs(current: v.productName, expect: "\"$(TARGET_NAME)\"", des: "3AF0A7F5231E61B50080E07C productName")
-                cs(current: v.targetedDeviceFamily, expect: "\"1,2\"", des: "3AF0A7F5231E61B50080E07C targetedDeviceFamily")
+                cs(current: v.productName, expect: "$(TARGET_NAME)", des: "3AF0A7F5231E61B50080E07C productName")
+                cs(current: v.targetedDeviceFamily, expect: "1,2", des: "3AF0A7F5231E61B50080E07C targetedDeviceFamily")
                 cs(current: v.testTargetName, expect: "SampleProject", des: "3AF0A7F5231E61B50080E07C testTargetName")
                 cs(current: v.name, expect: "Release", des: "3AF0A7F5231E61B50080E07C name")
             }

@@ -31,10 +31,13 @@ public class ParseXcodeprojSource {
             }
             projPath.append("\(v)/")
         }
+        
     }
     
     public func parseAllFiles() -> [String] {
-        
+        if projPath == "/Users/ming/Downloads/2961allsource/amap_bundle_mapbase/" {
+            //
+        }
         var nodes = [XcodeprojSourceNode]()
         
         // 第一次找出所有文件和文件夹
@@ -148,9 +151,19 @@ public class ParseXcodeprojSource {
             return path
         }
         
+        var fatherPath = fatherGroup.path
+        // source tree 不是 <group> 是 SOURCE_ROOT 时，会用到 name。这种情况不合理需要记录下来修改
+        if fatherGroup.sourceTree != "<group>" {
+            OCWarning.noUseGroupPath(fileName: path)
+            if fatherGroup.name.count > 0 {
+                fatherPath = fatherGroup.name
+            }
+        }
+        
+        
         // 拼路径
         var jointPath = path
-        jointPath = "\(fatherGroup.path)/\(path)"
+        jointPath = "\(fatherPath)/\(path)"
         
         // 查找更上一级的路径
         for (k,v) in proj.pbxGroup {

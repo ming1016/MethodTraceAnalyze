@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1484CE23B06F6B009A7AB5 /* SeekOCWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1484CD23B06F6B009A7AB5 /* SeekOCWarning.swift */; };
 		3A3823AC2393B8C600CB52C0 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823AB2393B8C600CB52C0 /* test.json */; };
 		3A3823B32393E7BA00CB52C0 /* ParseLaunchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B22393E7BA00CB52C0 /* ParseLaunchJSON.swift */; };
 		3A3823B52393E7D600CB52C0 /* LaunchJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3823B42393E7D600CB52C0 /* LaunchJSON.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A1484CD23B06F6B009A7AB5 /* SeekOCWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekOCWarning.swift; sourceTree = "<group>"; };
 		3A3823AB2393B8C600CB52C0 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		3A3823B22393E7BA00CB52C0 /* ParseLaunchJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseLaunchJSON.swift; sourceTree = "<group>"; };
 		3A3823B42393E7D600CB52C0 /* LaunchJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchJSON.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */,
 				3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */,
 				3A9136CB239A774A0073BFAE /* ParseOC.swift */,
+				3A1484CD23B06F6B009A7AB5 /* SeekOCWarning.swift */,
 				3A3823CC2393E8DD00CB52C0 /* TestOC.swift */,
 			);
 			path = OC;
@@ -446,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1484CE23B06F6B009A7AB5 /* SeekOCWarning.swift in Sources */,
 				3A3823CA2393E8C600CB52C0 /* ParseOCTokensDefine.swift in Sources */,
 				3AED1A032392A517006A2F48 /* Token.swift in Sources */,
 				3A3823DA2393ECE100CB52C0 /* ParseStandXML.swift in Sources */,

@@ -138,7 +138,7 @@ public class ParseXcodeprojNode {
                 if tokens.type == .string {
                     currentNodeType = .dicValue
                     if tokens.tokens.count > 0 {
-                        currentValue.append("\"\(tokensToString(tokens: tokens.tokens))\"")
+                        currentValue.append("\(tokensToString(tokens: tokens.tokens))")
                     }
                     continue
                 }
@@ -183,7 +183,7 @@ public class ParseXcodeprojNode {
                 }
                 if tokens.type == .string {
                     currentNodeType = .arrValue
-                    currentValue.append("\"\(tokensToString(tokens: tokens.tokens))\"")
+                    currentValue.append("\(tokensToString(tokens: tokens.tokens))")
                     continue
                 }
                 if tokens.type == .codeComment {

@@ -43,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        TestOC().testWorkspace()
 //        TestOC.testM(filePath: Config.aMFilePath.rawValue)
 //        TestOC.testOC()
+//        TestXcodeproj.testSection()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
