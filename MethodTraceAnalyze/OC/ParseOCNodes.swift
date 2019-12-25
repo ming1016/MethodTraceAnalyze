@@ -20,6 +20,9 @@ public enum OCNodeType {
     case method
 }
 
+// OCNode 值得的协议
+public protocol OCNodeValueProtocol {}
+
 // OC 语法树节点
 public struct OCNode {
     public var type: OCNodeType
@@ -27,6 +30,28 @@ public struct OCNode {
     public var identifier: String   // 标识
     public var lineRange: (Int,Int) // 行范围
     public var source: String       // 对应代码
+    public var value: OCNodeValueProtocol // 满足协议的值
+}
+
+public struct OCNodeDefaultValue: OCNodeValueProtocol {
+    public var defaultValue: String
+    init() {
+        defaultValue = ""
+    }
+}
+
+public struct OCNodeMethod: OCNodeValueProtocol {
+    public var belongClass: String
+    public var methodName: String
+    public var tokenNodes: [OCTokenNode]
+}
+
+public struct OCNodeClass: OCNodeValueProtocol {
+    public var className: String
+    public var baseClass: String
+    public var hMethod: [String]
+    public var mMethod: [String]
+    public var baseClasses: [String]
 }
 
 public class ParseOCNodes {
@@ -35,16 +60,19 @@ public class ParseOCNodes {
     private var tokenNodes: [OCTokenNode]
     
     // MARK: 初始化
-    public init(input: String) {
+    public init(input: String, filePath: String) {
         let formatInput = input.replacingOccurrences(of: "\r\n", with: "\n")
         linesContent = formatInput.components(separatedBy: .newlines)
+        // 统计文件对应行数
+        OCStatistics.fileLine(filePath: filePath, lines: linesContent.count)
+        
         tokenNodes = ParseOCTokens(input: formatInput).parse()
     }
     
     public func parse() -> OCNode {
         var pNode = defaultOCNode()
         pNode.type = .root
-        let rootNode = recusiveParseNode(parentNode: pNode, nodes: tokenNodes)
+        let rootNode = parseNode(parentNode: pNode, nodes: tokenNodes)
         return rootNode
     }
     
@@ -52,6 +80,8 @@ public class ParseOCNodes {
     private enum RState {
         case normal
         case eod                   // 换行
+        
+        // 方法
         case methodStart           // 方法开始
         case methodReturnEnd       // 方法返回类型结束
         case methodNameEnd         // 方法名结束
@@ -63,17 +93,27 @@ public class ParseOCNodes {
         case methodParamNameEnd    // 方法参数名结束
         case methodShouldEnd       // 针对方法定义的情况 比如 interface 里的 - (void)foo;
         
+        // 方法调用 [[UIScreen mainScreen] respondsToSelector:@selector(scale)]
+        case methodCallStart       // 方法调用开始
+        
+        // @
         case at                    // @
         case atImplementation      // @implementation
         case atProtocol            // @protocol
         case atInterface           // @interface
+        case atInterfaceName       // @interface name
+        case atInterfaceParent     // @interface name : base
+        case atInterfaceContent    // @interface 里内容
         case atProperty            // @property
+        
+        // #
+        case numberSign            // #
         
         case normalBlock           // oc方法外部的 block {}，用于 c方法
     }
     
-    // MARK: 递归解析
-    public func recusiveParseNode(parentNode:OCNode, nodes:[OCTokenNode]) -> OCNode {
+    // MARK: 解析
+    public func parseNode(parentNode:OCNode, nodes:[OCTokenNode]) -> OCNode {
         var pNode = parentNode
         var currentState: RState = .normal
         //var currentLevel = 0
@@ -81,9 +121,17 @@ public class ParseOCNodes {
         var currentStartLine = 0
         var currentPairCount = 0
         
+        // interface
+        var currentInterfaceName = ""
+        var currentInterfaceParent = ""
+        
         // method
         var currentMethodName = ""
         var currentClassName = ""
+        
+        // method content
+        var currentMethodTokenNodes = [OCTokenNode]()
+        
         for tkNode in nodes {
             if currentState == .methodShouldEnd {
                 if tkNode.value == "{" {
@@ -100,6 +148,7 @@ public class ParseOCNodes {
             
             if currentState == .methodContentStart {
                 //
+                currentMethodTokenNodes.append(tkNode)
                 if tkNode.value == "{" {
                     currentPairCount += 1
                     continue
@@ -115,10 +164,13 @@ public class ParseOCNodes {
                                 sourceContent += "\(linesContent[i])\n"
                             }
                         }
-                        pNode.subNodes.append(OCNode(type: .method, subNodes: [OCNode](), identifier:"[\(currentClassName)]\(currentMethodName)", lineRange: (currentStartLine, tkNode.line), source: sourceContent))
+                        let identifier = "[\(currentClassName)]\(currentMethodName)"
+                        let methodValue = OCNodeMethod(belongClass: currentClassName, methodName: currentMethodName, tokenNodes: currentMethodTokenNodes)
+                        pNode.subNodes.append(OCNode(type: .method, subNodes: [OCNode](), identifier:identifier, lineRange: (currentStartLine, tkNode.line), source: sourceContent, value: methodValue))
                         // 重置 current
                         currentState = .normal
                         currentMethodName = ""
+                        currentMethodTokenNodes = [OCTokenNode]()
                         currentStartLine = 0
                         currentPairCount = 0
                     }
@@ -225,7 +277,30 @@ public class ParseOCNodes {
             }
             
             // @protocol || @interface
-            if currentState == .atProtocol || currentState == .atInterface {
+            if currentState == .atInterface {
+                currentInterfaceName = tkNode.value
+                currentState = .atInterfaceName
+                continue
+            }
+            
+            if currentState == .atInterfaceName {
+                // @interface name : base
+                currentState = .atInterfaceContent
+                if tkNode.value == ":" {
+                    currentState = .atInterfaceParent
+                }
+                
+                continue
+            }
+            
+            if currentState == .atInterfaceParent {
+                currentInterfaceParent = tkNode.value
+                currentState = .atInterfaceContent
+                continue
+            }
+            
+            if currentState == .atProtocol || currentState == .atInterfaceContent {
+                
                 if tkNode.value == "@" {
                     currentState = .at
                 }
@@ -238,14 +313,42 @@ public class ParseOCNodes {
                 if tkNode.value == "implementation" {
                     currentState = .atImplementation
                     continue
-                } else if tkNode.value == "protocol" {
+                }
+                
+                if tkNode.value == "protocol" {
                     currentState = .atProtocol
                     continue
-                } else if tkNode.value == "interface" {
+                }
+                
+                if tkNode.value == "interface" {
                     currentState = .atInterface
                     continue
-                } else {
-                    // 其它情况比如 @synthesize 的处理
+                }
+                
+                if tkNode.value == "end" {
+                    if currentInterfaceName.count > 0 {
+                        // 当有基类时，需要做记录
+                        if currentInterfaceParent.count > 0 {
+                            OCStatistics.classAndBaseClass(aClass: currentInterfaceName, baseClass: currentInterfaceParent)
+                        }
+                        
+                        let nodeClass = OCNodeClass(className: currentInterfaceName, baseClass: currentInterfaceParent, hMethod: [String](), mMethod: [String](), baseClasses: [String]())
+                        pNode.subNodes.append(OCNode(type: .class, subNodes: [OCNode](), identifier:"\(currentInterfaceName)", lineRange: (0, 0), source: "", value: nodeClass))
+                        
+                        currentInterfaceName = ""
+                        currentInterfaceParent = ""
+                    }
+                    continue
+                }
+                
+                // 其它情况比如 @synthesize 的处理
+                currentState = .normal
+                continue
+            }
+            
+            // #
+            if currentState == .numberSign {
+                if tkNode.type == .eod {
                     currentState = .normal
                 }
                 continue
@@ -287,6 +390,10 @@ public class ParseOCNodes {
                     currentState = .normalBlock
                     continue
                 }
+                if tkNode.value == "#" {
+                    currentState = .numberSign
+                    continue
+                }
                 
                 continue
             }
@@ -298,7 +405,7 @@ public class ParseOCNodes {
     }
     
     private func defaultOCNode() -> OCNode {
-        return OCNode(type: .default, subNodes: [OCNode](), identifier: "", lineRange: (0, 0), source: "")
+        return OCNode(type: .default, subNodes: [OCNode](), identifier: "", lineRange: (0, 0), source: "", value: OCNodeDefaultValue())
     }
     
 }

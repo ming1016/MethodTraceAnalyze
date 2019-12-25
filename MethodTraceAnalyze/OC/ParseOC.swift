@@ -19,7 +19,7 @@ public class ParseOC {
         
         let groupCount = 60 // 一组容纳个数
         let groupTotal = allPath.count/groupCount + 1
-        
+
         var groups = [[String]]()
         for i in 0..<groupTotal {
             var group = [String]()
@@ -32,16 +32,16 @@ public class ParseOC {
                 groups.append(group)
             }
         }
-        
+
         for group in groups {
             let dispatchGroup = DispatchGroup()
-            
+
             for node in group {
                 dispatchGroup.enter()
                 let queue = DispatchQueue.global()
                 queue.async {
                     let ocContent = FileHandle.fileContent(path: node)
-                    let node = ParseOCNodes(input: ocContent).parse()
+                    let node = ParseOCNodes(input: ocContent, filePath: node).parse()
                     for aNode in node.subNodes {
                         allNodes.append(aNode)
                     }
@@ -51,6 +51,8 @@ public class ParseOC {
             } // end for
             dispatchGroup.wait()
         } // end for
+        
+        
         return allNodes
     }
 }

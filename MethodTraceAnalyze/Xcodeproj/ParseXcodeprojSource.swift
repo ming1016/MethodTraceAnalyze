@@ -35,9 +35,7 @@ public class ParseXcodeprojSource {
     }
     
     public func parseAllFiles() -> [String] {
-        if projPath == "/Users/ming/Downloads/2961allsource/amap_bundle_mapbase/" {
-            //
-        }
+        
         var nodes = [XcodeprojSourceNode]()
         
         // 第一次找出所有文件和文件夹
@@ -66,7 +64,7 @@ public class ParseXcodeprojSource {
         // 通过遍历，然后递归每个 node 的 fatherValue 获得完整路径
         var fullPaths = [String]()
         // 白名单
-        let suffixWhitelist = [".m",".mm"]
+        let suffixWhitelist = [".m",".mm",".h"]
         for node in nodes {
             let path = recusiveFatherPaths(node: node, path: node.name)
             // 处理 path 数据
@@ -154,7 +152,7 @@ public class ParseXcodeprojSource {
         var fatherPath = fatherGroup.path
         // source tree 不是 <group> 是 SOURCE_ROOT 时，会用到 name。这种情况不合理需要记录下来修改
         if fatherGroup.sourceTree != "<group>" {
-            OCWarning.noUseGroupPath(fileName: path)
+            OCStatistics.noUseGroupPath(fileName: path)
             if fatherGroup.name.count > 0 {
                 fatherPath = fatherGroup.name
             }

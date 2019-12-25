@@ -32,7 +32,7 @@ public class TestOC: Test {
     
     public static func testM(filePath:String) {
         let mContent = FileHandle.fileContent(path: filePath)
-        let node = ParseOCNodes(input: mContent).parse()
+        let node = ParseOCNodes(input: mContent, filePath: filePath).parse()
         var saveStr = ""
         for aNode in node.subNodes {
             saveStr += "//\(aNode.identifier)\n---\n\(aNode.source)\n\n"
@@ -43,10 +43,9 @@ public class TestOC: Test {
     public static func testOC() {
         
         let ocPath = Bundle.main.path(forResource: "AppDelegate", ofType: "txt") ?? ""
-        
         let ocContent = FileHandle.fileContent(path: ocPath)
         
-        let node = ParseOCNodes(input: ocContent).parse()
+        let node = ParseOCNodes(input: ocContent, filePath: ocPath).parse()
         
         print(node)
     }

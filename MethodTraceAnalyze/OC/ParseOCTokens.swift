@@ -181,7 +181,7 @@ public class ParseOCTokens {
                     advanceTk()
                     advanceTk()
                     currentValue += "'"
-                } else if currentToken.des() == "'" {
+                } else if currentToken.des() == "'" || currentToken == .newLine {
                     advanceTk()
                     break
                 } else {
@@ -202,7 +202,7 @@ public class ParseOCTokens {
                     advanceTk()
                     advanceTk()
                     currentValue += "\""
-                } else if currentToken.des() == "\"" {
+                } else if currentToken.des() == "\"" || currentToken == .newLine {
                     advanceTk()
                     break
                 } else {

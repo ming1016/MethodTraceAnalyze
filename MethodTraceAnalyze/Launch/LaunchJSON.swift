@@ -28,9 +28,41 @@ class LaunchJSON {
         let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
         
         var sourceDic = [String:String]()
+        
+        let classChians = OCStatistics.classChain(classAndBaseClassMap: OCStatistics.classAndBaseClass)
+        // 每个类里有哪些方法个方法
+        var classHaveMethods = [String:[String:String]]()
+        
         for aNode in allNodes {
-            sourceDic[aNode.identifier] = aNode.source.replacingOccurrences(of: "\n", with: "</br>").replacingOccurrences(of: " ", with: "&nbsp;")
+            if aNode.type == .method {
+                let nodeSource = aNode.source.replacingOccurrences(of: "\n", with: "</br>").replacingOccurrences(of: " ", with: "&nbsp;")
+                sourceDic[aNode.identifier] = nodeSource
+                let methodValue:OCNodeMethod = aNode.value as! OCNodeMethod
+                var dic = [String:String]()
+                dic[methodValue.methodName] = aNode.source
+                classHaveMethods[methodValue.belongClass] = dic
+                
+                // 处理所有方法的 tokenNode
+                let tokenNodes = methodValue.tokenNodes
+                let methodCalls = ParseOCMethodContent.parseMethodCall(tokenNodes: tokenNodes)
+                
+            }
         }
+        
+        for aNode in allNodes {
+            // 取方法
+            if aNode.type == .method {
+                var nodeSourceOrign = aNode.source
+                
+                let nodeSource = nodeSourceOrign.replacingOccurrences(of: "\n", with: "</br>").replacingOccurrences(of: " ", with: "&nbsp;")
+                sourceDic[aNode.identifier] = nodeSource
+                OCStatistics.methodContent[aNode.identifier] = nodeSource
+            }
+        }
+        
+        // 统计
+        
+        
         
         // 获取启动时的方法
         
@@ -144,7 +176,30 @@ class LaunchJSON {
                 let methodId = "[\(className)]\(methodName)"
                 
                 // 判断是否有代码内容
-                let sourceContent = sourceDic[methodId] ?? ""
+                var sourceContent = sourceDic[methodId] ?? ""
+                
+                if sourceContent.count > 0 {
+                    //
+                } else {
+                    if methodId == "[NMLayersManager]initForbiddenSource" {
+                        //
+                    }
+                    OCStatistics.noSourceMethod(methodId: methodId)
+                    let chains = classChians[className] ?? [String]()
+                    for pClass in chains {
+                        guard let methods = classHaveMethods[pClass] else {
+                            continue
+                        }
+                        guard let pSource = methods[methodName] else {
+                            continue
+                        }
+                        OCStatistics.useBaseClassMethod(methodId: "\(methodId)")
+                        sourceContent = pSource
+                        break
+                    }
+                }
+                
+                
                 var methodContentClickable = ""
                 var methodClickable = "\(treeSymbol) \(methodId) \(mergeStr)"
                 if sourceContent.count > 0 {

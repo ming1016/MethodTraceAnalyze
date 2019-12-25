@@ -51,6 +51,7 @@
 		3AED1A0F2392C5CE006A2F48 /* ParseJSONTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED1A0D2392C5CE006A2F48 /* ParseJSONTokens.swift */; };
 		3AED1A102392C5CE006A2F48 /* ParseJSONItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED1A0E2392C5CE006A2F48 /* ParseJSONItem.swift */; };
 		3AED1A132392C5F8006A2F48 /* TestJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED1A122392C5F8006A2F48 /* TestJSON.swift */; };
+		3AEDBC3E23B361EE0016B9EF /* ParseOCMethodContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDBC3D23B361EE0016B9EF /* ParseOCMethodContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		3AED1A0D2392C5CE006A2F48 /* ParseJSONTokens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseJSONTokens.swift; sourceTree = "<group>"; };
 		3AED1A0E2392C5CE006A2F48 /* ParseJSONItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseJSONItem.swift; sourceTree = "<group>"; };
 		3AED1A122392C5F8006A2F48 /* TestJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestJSON.swift; sourceTree = "<group>"; };
+		3AEDBC3D23B361EE0016B9EF /* ParseOCMethodContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOCMethodContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				3A3823C82393E8C600CB52C0 /* ParseOCNodes.swift */,
+				3AEDBC3D23B361EE0016B9EF /* ParseOCMethodContent.swift */,
 				3A3823C62393E8C600CB52C0 /* ParseOCTokens.swift */,
 				3A3823C72393E8C600CB52C0 /* ParseOCTokensDefine.swift */,
 				3A9136CB239A774A0073BFAE /* ParseOC.swift */,
@@ -479,6 +482,7 @@
 				3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */,
 				3A3823BC2393E84200CB52C0 /* ParseXcodeprojNode.swift in Sources */,
 				3AED1A052392A517006A2F48 /* Lexer.swift in Sources */,
+				3AEDBC3E23B361EE0016B9EF /* ParseOCMethodContent.swift in Sources */,
 				3A9136CC239A774A0073BFAE /* ParseOC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
