@@ -42,9 +42,9 @@ class LaunchJSON {
                 dic[methodValue.methodName] = aNode.source
                 classHaveMethods[methodValue.belongClass] = dic
                 
-                // 处理所有方法的 tokenNode
+                // TODO: 处理所有方法的 tokenNode
                 let tokenNodes = methodValue.tokenNodes
-                let methodCalls = ParseOCMethodContent.parseMethodCall(tokenNodes: tokenNodes)
+                
                 
             }
         }
@@ -59,10 +59,6 @@ class LaunchJSON {
                 OCStatistics.methodContent[aNode.identifier] = nodeSource
             }
         }
-        
-        // 统计
-        
-        
         
         // 获取启动时的方法
         

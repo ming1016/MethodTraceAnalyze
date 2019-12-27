@@ -40,6 +40,14 @@ public class TestOC: Test {
         FileHandle.writeToDownload(fileName: "oneFileMethodSource", content: saveStr)
     }
     
+    public static func testMethodCall(filePath:String) {
+        let mContent = FileHandle.fileContent(path: filePath)
+        let node = ParseOCNodes(input: mContent, filePath: filePath).parse()
+        for aNode in node.subNodes {
+            //
+        }
+    }
+    
     public static func testOC() {
         
         let ocPath = Bundle.main.path(forResource: "AppDelegate", ofType: "txt") ?? ""

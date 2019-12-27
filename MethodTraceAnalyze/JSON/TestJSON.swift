@@ -65,4 +65,114 @@ public class TestJSON:Test {
         
     }
     
+    public static func codeLines() {
+        let jsonOld = FileHandle.fileContent(path: "/Users/ming/Downloads/data/CodeLines/1020_codelines.json")
+        let jsonNew = FileHandle.fileContent(path: "/Users/ming/Downloads/data/CodeLines/1025_codelines.json")
+        
+        let itemOld = ParseJSONItem(input: jsonOld).parse()
+        let itemNew = ParseJSONItem(input: jsonNew).parse()
+        
+        let oldBundles = itemOld.array[0].kvs[3].value.array
+        let newBundles = itemNew.array[0].kvs[3].value.array
+        
+        var bizDic = [String:String]()
+        
+        func dicData(arr:[JSONItem]) -> [String:Int] {
+            let filterTech = ["Java","ObjectiveC","ObjectiveC++","C/C++Header","C","C++","XML"]
+            var dic = [String:Int]()
+            
+            for aBundle in arr {
+                let bundleName = aBundle.kvs[0].value.value
+                
+                let biz = aBundle.kvs[1].value.value
+                bizDic[bundleName] = biz
+//                let bizDetail = aBundle.kvs[3].value.value
+                let platform = aBundle.kvs[4].value.value
+                
+                if platform == "ios" || platform == "android" {
+                    //
+                } else {
+                    continue
+                }
+//                print(bundleName)
+                let classifys = aBundle.kvs[5].value.array
+                for aClassify in classifys {
+                    let kvs = aClassify.kvs
+                    var code = 0
+                    var name = ""
+                    for akv in kvs {
+                        if akv.key == "code" {
+                            code = Int(akv.value.value) ?? 0
+                        } else if akv.key == "name" {
+                            name = akv.value.value
+                        }
+                        
+                    }
+//                    print("code:\(code) name:\(name)")
+                    if filterTech.contains(name) {
+                        if dic[bundleName] != nil {
+                            dic[bundleName]! += code
+                        } else {
+                            dic[bundleName] = code
+                        }
+                    } // end if filterTech.contains(name)
+                    
+                } // end for aClassify in classifys
+            } // end for aBundle in oldBundles
+            return dic
+        }
+        
+        let oldDic = dicData(arr: oldBundles)
+        let newDic = dicData(arr: newBundles)
+        
+        var totalOld = 0
+        for (_,v) in oldDic {
+            totalOld += v
+        }
+        var totalNew = 0
+        
+        var moreBundle = ""
+        var moreCode = [String:Int]()
+        var lessCode = [String:Int]()
+        var moreTotal = 0
+        var lessTotal = 0
+        for (k,v) in newDic {
+            let kBiz = bizDic[k]
+            let kDes = "\(k)[\(kBiz ?? "")]"
+            totalNew += v
+            if oldDic[k] == nil {
+                moreBundle.append("新增：\(kDes) \(v)\r\n")
+            } else {
+                let oldValue = oldDic[k] ?? 0
+                let diff = v - oldValue
+                if diff > 0 {
+                    moreCode["\(kDes)多了\(diff)"] = diff
+                    moreTotal += diff
+                } else if diff < 0 {
+                    lessCode["\(kDes)少了\(diff)"] = diff
+                    lessTotal += diff
+                }
+            } // end if
+            
+        } // end for
+        
+        print(moreBundle)
+        let sortMoreCode = moreCode.sortedByValue
+        let sortLessCode = lessCode.sortedByValue
+        for (k,_) in sortMoreCode {
+            print(k)
+        }
+        print(" ")
+        for (k,_) in sortLessCode {
+            print(k)
+        }
+        print(" ")
+//        print(moreCode)
+//        print(lessCode)
+        print("共多了：\(moreTotal)")
+        print("共少了：\(lessTotal)")
+        print("旧总量：\(totalOld)")
+        print("新总量：\(totalNew)")
+    }
+    
 }

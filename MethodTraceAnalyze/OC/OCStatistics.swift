@@ -10,7 +10,6 @@ import Foundation
 
 public class OCStatistics {
     
-    
     // MARK: 执行完后的统计
     // 调用过的方法和调用次数
     static var calledMethodAndCount = [String:Int]()
@@ -45,6 +44,8 @@ public class OCStatistics {
         return chainMap
     }
     
+    // MARK: 进行中的统计
+    
     // 有哪些运行时方法调用，没有源码
     static var noSourceMethod = [String]()
     static func noSourceMethod(methodId:String) {
@@ -62,8 +63,6 @@ public class OCStatistics {
         
     }
     
-    
-    // MARK: 进行中的统计
     // 方法
     static var methodContent = [String:String]()
     static func methodContent(method:String, content:String) {
@@ -77,7 +76,7 @@ public class OCStatistics {
     static func classAndBaseClass(aClass: String, baseClass: String) {
         runSerial {
             classAndBaseClass[aClass] = baseClass
-            print("aClass:\(aClass) baseClass:\(baseClass)")
+//            print("aClass:\(aClass) baseClass:\(baseClass)")
         }
     }
     
@@ -88,7 +87,7 @@ public class OCStatistics {
         runSerial {
             fileLines[filePath] = lines
             fileLinesTotal += lines
-            print("filePath: \(filePath) lines: \(lines)")
+//            print("filePath: \(filePath) lines: \(lines)")
             print("lines total: \(fileLinesTotal)")
         }
     }
@@ -104,7 +103,7 @@ public class OCStatistics {
     
     // MARK: 基本工具
     typealias WorkQueueClosure = ()->Void
-    static let workQueue = DispatchQueue(label: "com.MethodTraceAnalyze.workQueue",qos: DispatchQoS.background)
+    static let workQueue = DispatchQueue(label: "com.MethodTraceAnalyze.statisticsQueue",qos: DispatchQoS.background)
     static func runSerial(closure:@escaping WorkQueueClosure) {
         workQueue.async(execute: closure)
     }
@@ -115,9 +114,12 @@ public class OCStatistics {
         print("行总数: \(OCStatistics.fileLinesTotal)")
         print("没有源码的方法总数：\(OCStatistics.noSourceMethod.count)")
         print("没有源码的方法：")
-        for method in OCStatistics.noSourceMethod {
-            print(method)
-        }
+//        for method in OCStatistics.noSourceMethod {
+//            print(method)
+//        }
         print("使用父类方法的方法总数：\(OCStatistics.useBaseClassMethod.count)")
+//        for method in OCStatistics.useBaseClassMethod {
+//            print(method)
+//        }
     }
 }

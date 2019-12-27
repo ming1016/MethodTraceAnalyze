@@ -9,8 +9,14 @@
 import Foundation
 
 public class ParseOCMethodContent {
-    static func parseMethodCall(tokenNodes:[OCTokenNode]) -> [String] {
-        
+    
+    private var tkNodes: [OCTokenNode]
+    
+    public init(tokenNodes:[OCTokenNode]) {
+        tkNodes = tokenNodes
+    }
+    
+    static func parseMethodCall() -> [String] {
         
         return [String]()
     }

@@ -32,18 +32,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func export() {
-//        let bundlePath = Bundle.main.path(forResource: "startTrace", ofType: "json")
-//        let jsonPath = bundlePath ?? ""
-//        let jsonContent = FileHandle.fileContent(path: jsonPath)
         
+
+//        TestJSON.codeLines()
 //        TestJSON.testJSON()
 //        TestXML.testXcodeWorkspace()
-        LaunchJSON.exportAll()
 //        TestXcodeproj.testSection()
+        
 //        TestOC().testWorkspace()
 //        TestOC.testM(filePath: Config.aMFilePath.rawValue)
 //        TestOC.testOC()
-//        TestXcodeproj.testSection()
+//        TestOC.testMethodCall(filePath: Config.aMFilePath.rawValue)
+
+        
+        LaunchJSON.exportAll()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+            OCStatistics.showAll()
+        }
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
