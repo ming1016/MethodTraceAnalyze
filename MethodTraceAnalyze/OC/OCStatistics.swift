@@ -112,12 +112,17 @@ public class OCStatistics {
         print("方法总数: \(OCStatistics.methodContent.keys.count)")
         print("有基类的方法总数: \(OCStatistics.classAndBaseClass.keys.count)")
         print("行总数: \(OCStatistics.fileLinesTotal)")
-        print("没有源码的方法总数：\(OCStatistics.noSourceMethod.count)")
-        print("没有源码的方法：")
+        // 按行排序
+        let sortFileLines = fileLines.sortedByValue
+        for (k,v) in sortFileLines {
+            print("\(k) \(v)")
+        }
+//        print("没有源码的方法总数：\(OCStatistics.noSourceMethod.count)")
+//        print("没有源码的方法：")
 //        for method in OCStatistics.noSourceMethod {
 //            print(method)
 //        }
-        print("使用父类方法的方法总数：\(OCStatistics.useBaseClassMethod.count)")
+//        print("使用父类方法的方法总数：\(OCStatistics.useBaseClassMethod.count)")
 //        for method in OCStatistics.useBaseClassMethod {
 //            print(method)
 //        }

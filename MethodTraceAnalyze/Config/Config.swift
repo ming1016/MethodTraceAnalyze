@@ -11,6 +11,7 @@ import Foundation
 public enum Config: String {
     case downloadPath = "/Users/ming/Downloads/"
     // /Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace
+    // /Users/ming/Downloads/Test/TestOC/TestOC.xcworkspace
     case workPath = "/Users/ming/Downloads/Test/TestOC/TestOC.xcworkspace"
     //
     case aMFilePath = "/Users/ming/Downloads/Test/TestOC/TestOC/AppDelegate.m"

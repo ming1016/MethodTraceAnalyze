@@ -33,7 +33,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func export() {
         
-
 //        TestJSON.codeLines()
 //        TestJSON.testJSON()
 //        TestXML.testXcodeWorkspace()
@@ -43,7 +42,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        TestOC.testM(filePath: Config.aMFilePath.rawValue)
 //        TestOC.testOC()
 //        TestOC.testMethodCall(filePath: Config.aMFilePath.rawValue)
-
+//        TestOC.testUnUsedClass(filePath: Config.aMFilePath.rawValue)
+//        let _ = ParseOCMethodContent.unUsedClass(workSpacePath: Config.workPath.rawValue)
         
         LaunchJSON.exportAll()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
