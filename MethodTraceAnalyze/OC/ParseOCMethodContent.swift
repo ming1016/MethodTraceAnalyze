@@ -11,6 +11,8 @@ import Foundation
 public class ParseOCMethodContent {
     
     static func unUsedClass(workSpacePath:String) -> Set<String> {
+        var baseClasses = Set<String>() // 过滤属于基类的类
+        
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
         var allClassSet:Set<String> = Set()
@@ -18,6 +20,10 @@ public class ParseOCMethodContent {
             if aNode.type == .class {
                 let classValue = aNode.value as! OCNodeClass
                 allClassSet.insert(classValue.className)
+                if classValue.baseClass.count > 0 {
+                    baseClasses.insert(classValue.baseClass)
+                }
+                
             }
         } // end for aNode in allNodes
         
@@ -26,6 +32,7 @@ public class ParseOCMethodContent {
         func recursiveCheckUnUsedClass(unUsed:Set<String>) -> Set<String> {
             recursiveCount += 1
             print("into recursive!!!!第\(recursiveCount)次")
+            print("----------------------\n")
             for a in unUsed {
                 print(a)
             }
@@ -62,6 +69,27 @@ public class ParseOCMethodContent {
                 }
             }
             
+            let unUsedClassSetCopy = unUsedClassSet
+            for aSet in unUsedClassSetCopy {
+                // 过滤系统控件
+                let filters = ["NS","UI"]
+                var shouldFilter = false
+                for filter in filters {
+                    if aSet.hasPrefix(filter) {
+                        shouldFilter = true
+                    }
+                }
+                // 过滤基类
+                if baseClasses.contains(aSet) {
+                    shouldFilter = true
+                }
+                
+                // 开始过滤
+                if shouldFilter {
+                    unUsedClassSet.remove(aSet)
+                }
+            }
+            
             if hasUnUsed {
                 return recursiveCheckUnUsedClass(unUsed: unUsedClassSet)
             }
@@ -69,21 +97,9 @@ public class ParseOCMethodContent {
             return unUsedClassSet
         }
         
-        var unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
-        let unUsedClassSetCopy = unUsedClassFromRecursive
-        for aSet in unUsedClassSetCopy {
-            //
-            let filters = ["NS","UI"]
-            var shouldFilter = false
-            for filter in filters {
-                if aSet.hasPrefix(filter) {
-                    shouldFilter = true
-                }
-            }
-            if shouldFilter {
-                unUsedClassFromRecursive.remove(aSet)
-            }
-        }
+        let unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
+        
+        
         
         print("所有无用类：")
         for a in unUsedClassFromRecursive {

@@ -299,6 +299,7 @@ public class ParseOCNodes {
                 continue
             }
             
+            
             if currentState == .atProtocol || currentState == .atInterfaceContent {
                 
                 if tkNode.value == "@" {
@@ -356,6 +357,7 @@ public class ParseOCNodes {
             
             // oc方法外部的 block {}
             if currentState == .normalBlock {
+                currentMethodTokenNodes.append(tkNode)
                 if tkNode.value == "{" {
                     currentPairCount += 1
                     continue
@@ -364,6 +366,28 @@ public class ParseOCNodes {
                     currentPairCount -= 1
                     if currentPairCount == 0 {
                         currentState = .normal
+                        
+                        // 当作匿名方法记录
+                        // 获取 block 代码
+                        var sourceContent = ""
+                        for i in currentStartLine..<tkNode.line + 1 {
+                            if i < linesContent.count {
+                                sourceContent += "\(linesContent[i])\n"
+                            }
+                        }
+                        
+                        // 拼装
+                        let currentTime = Date().timeIntervalSince1970
+                        let identifier = "identifier\(currentTime)"
+                        let methodValue = OCNodeMethod(belongClass: "class\(currentTime)", methodName: "method\(currentTime)", tokenNodes: currentMethodTokenNodes)
+                        pNode.subNodes.append(OCNode(type: .method, subNodes: [OCNode](), identifier: identifier, lineRange: (currentStartLine, tkNode.line), source: sourceContent, value: methodValue))
+                        // 重置
+                        currentState = .normal
+                        currentMethodName = ""
+                        currentMethodTokenNodes = [OCTokenNode]()
+                        currentStartLine = 0
+                        currentPairCount = 0
+                        
                         continue
                     }
                 }
@@ -385,9 +409,11 @@ public class ParseOCNodes {
                     currentState = .eod
                     continue
                 }
+                // 外部 block 方法
                 if tkNode.value == "{" {
                     currentPairCount += 1
                     currentState = .normalBlock
+                    currentStartLine = tkNode.line
                     continue
                 }
                 if tkNode.value == "#" {

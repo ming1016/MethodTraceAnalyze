@@ -13,8 +13,9 @@ public enum Config: String {
     // /Users/ming/Downloads/GCDFetchFeed/GCDFetchFeed/GCDFetchFeed.xcworkspace
     // /Users/ming/Downloads/Test/TestOC/TestOC.xcworkspace
     case workPath = "/Users/ming/Downloads/Test/TestOC/TestOC.xcworkspace"
-    //
+    // /Users/ming/Downloads/Test/TestOC/TestOC/AppDelegate.m
     case aMFilePath = "/Users/ming/Downloads/Test/TestOC/TestOC/AppDelegate.m"
+    
     // startTrace、trace_15s1114
     case traceJSON = "startTrace"
 }
