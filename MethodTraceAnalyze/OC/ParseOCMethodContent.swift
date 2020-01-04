@@ -69,27 +69,6 @@ public class ParseOCMethodContent {
                 }
             }
             
-            let unUsedClassSetCopy = unUsedClassSet
-            for aSet in unUsedClassSetCopy {
-                // 过滤系统控件
-                let filters = ["NS","UI"]
-                var shouldFilter = false
-                for filter in filters {
-                    if aSet.hasPrefix(filter) {
-                        shouldFilter = true
-                    }
-                }
-                // 过滤基类
-                if baseClasses.contains(aSet) {
-                    shouldFilter = true
-                }
-                
-                // 开始过滤
-                if shouldFilter {
-                    unUsedClassSet.remove(aSet)
-                }
-            }
-            
             if hasUnUsed {
                 return recursiveCheckUnUsedClass(unUsed: unUsedClassSet)
             }
@@ -97,14 +76,36 @@ public class ParseOCMethodContent {
             return unUsedClassSet
         }
         
-        let unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
+        var unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
         
-        
+        let unUsedClassSetCopy = unUsedClassFromRecursive
+        for aSet in unUsedClassSetCopy {
+            // 过滤系统控件
+            let filters = ["NS","UI"]
+            var shouldFilter = false
+            for filter in filters {
+                if aSet.hasPrefix(filter) {
+                    shouldFilter = true
+                }
+            }
+            // 过滤基类
+            if baseClasses.contains(aSet) {
+                shouldFilter = true
+            }
+            
+            // 开始过滤
+            if shouldFilter {
+                unUsedClassFromRecursive.remove(aSet)
+            }
+        }
         
         print("所有无用类：")
         for a in unUsedClassFromRecursive {
             print(a)
         }
+        
+        // 对无用类进行删除
+        
         
         return unUsedClassFromRecursive
     }
