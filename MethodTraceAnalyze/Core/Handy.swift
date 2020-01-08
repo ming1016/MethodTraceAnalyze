@@ -13,3 +13,15 @@ func delay(interval: TimeInterval, closure: @escaping () -> Void) {
           closure()
      }
 }
+
+func nowDateFormat() -> String {
+    let now = Date()
+    let format = DateFormatter()
+    format.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+    
+    return format.string(from: now)
+}
+
+func nowTimeInterval() -> Int {
+    return Int(Date().timeIntervalSince1970)
+}

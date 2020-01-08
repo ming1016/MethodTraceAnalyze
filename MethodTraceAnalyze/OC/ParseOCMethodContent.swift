@@ -12,6 +12,7 @@ public class ParseOCMethodContent {
     
     static func unUsedClass(workSpacePath:String) -> Set<String> {
         var baseClasses = Set<String>() // 过滤属于基类的类
+        var cellClasses = Set<String>() // 过滤 Cell 基类
         
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
@@ -22,6 +23,9 @@ public class ParseOCMethodContent {
                 allClassSet.insert(classValue.className)
                 if classValue.baseClass.count > 0 {
                     baseClasses.insert(classValue.baseClass)
+                }
+                if classValue.baseClasses.contains("UITableViewCell") || classValue.className.hasSuffix("Cell") {
+                    cellClasses.insert(classValue.className)
                 }
                 
             }
@@ -38,7 +42,7 @@ public class ParseOCMethodContent {
             }
             var unUsedClassSet = unUsed
             
-            // 清理无用
+            // 缩小范围
             for aUnUsed in unUsedClassSet {
                 if allClassSet.contains(aUnUsed) {
                     allClassSet.remove(aUnUsed)
@@ -49,6 +53,7 @@ public class ParseOCMethodContent {
             for aNode in allNodes {
                 if aNode.type == .method {
                     let nodeValue:OCNodeMethod = aNode.value as! OCNodeMethod
+                    // 过滤已判定无用类里的方法
                     guard !unUsedClassSet.contains(nodeValue.belongClass) else {
                         continue
                     }
@@ -62,6 +67,7 @@ public class ParseOCMethodContent {
                 } // end if aNode.type == .method
             } // end for aNode in allNodes
             var hasUnUsed = false
+            // 找出无用类
             for aSet in allClassSet {
                 if !allUsedClassSet.contains(aSet) {
                     unUsedClassSet.insert(aSet)
@@ -70,12 +76,14 @@ public class ParseOCMethodContent {
             }
             
             if hasUnUsed {
+                // 如果发现还有无用的类，需要继续递归调用进行分析
                 return recursiveCheckUnUsedClass(unUsed: unUsedClassSet)
             }
             
             return unUsedClassSet
         }
         
+        // 递归调用
         var unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
         
         let unUsedClassSetCopy = unUsedClassFromRecursive
@@ -92,24 +100,80 @@ public class ParseOCMethodContent {
             if baseClasses.contains(aSet) {
                 shouldFilter = true
             }
+            // 过滤 cell
+            if cellClasses.contains(aSet) {
+                shouldFilter = true
+            }
             
             // 开始过滤
             if shouldFilter {
                 unUsedClassFromRecursive.remove(aSet)
             }
         }
-        
+        print("\n")
         print("所有无用类：")
         for a in unUsedClassFromRecursive {
             print(a)
         }
         
         // 对无用类进行删除
+        let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: workSpacePath)
+        var allData = [commentedOutUnUsedClassStruct]()
+        var allClassInfo = [String:Int]()
+        FileHandle.handlesFiles(allfilePath: allPath) { (filePath, fileContent) in
+            let classStructArr = ModifyOCContent(input: fileContent, inputFilePath: filePath).commentedOutUnUsedClass(unUsedClasses: unUsedClassFromRecursive)
+            if classStructArr.count > 0 {
+                for classStruct in classStructArr {
+                    allData.append(classStruct)
+                    allClassInfo[classStruct.classIdentifier] = classStruct.lineCount
+                }
+            } // end if
+        } // end FileHandle.handlesFiles
         
+        var saveStr = ""
+        for data in allData {
+            saveStr += "\(data.classIdentifier)\n"
+            saveStr += "\(data.lineCount)\n"
+            saveStr += "\(data.source)\n"
+            saveStr += "\n"
+            
+            // 对代码进行注释
+            let content = FileHandle.fileContent(path: data.filePath)
+            let contentArr = content.components(separatedBy: .newlines)
+            
+            var newContent = ""
+            var index = 0
+            for line in contentArr {
+                if index >= data.lineStart && index <= data.lineEnd  {
+                    newContent.append("//\(line)\n")
+                } else {
+                    newContent.append("\(line)\n")
+                } // end if
+                index += 1
+            } // end for
+            
+            FileHandle.fileSave(content: newContent, path: "\(data.filePath)\(nowDateFormat())")
+        }
+        
+        FileHandle.writeToDownload(fileName: "ClassContent\(nowDateFormat())", content: saveStr)
+        
+        let sortedClassInfo = allClassInfo.sortedByValue
+        
+        var saveInfoStr = ""
+        var totalLine = 0
+        for (k,v) in sortedClassInfo {
+            //
+            saveInfoStr += "name:\(k) line:\(v)\n"
+            totalLine += v
+        }
+        saveInfoStr = "总代码行：\(totalLine)\n" + saveInfoStr
+        
+        FileHandle.writeToDownload(fileName: "ClassLine\(nowDateFormat())", content: saveInfoStr)
         
         return unUsedClassFromRecursive
     }
     
+    // 找出单个方法内用过的类
     static func parseAMethodUsedClass(node: OCNode, allClass: Set<String>) -> Set<String> {
         var usedClassSet:Set<String> = Set()
         guard node.type == .method else {

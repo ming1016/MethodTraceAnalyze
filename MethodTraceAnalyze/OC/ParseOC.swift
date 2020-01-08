@@ -11,10 +11,10 @@ import Foundation
 public class ParseOC {
     public static func ocNodes(workspacePath:String) -> [OCNode] {
         let allPath = XcodeProjectParse.allSourceFileInWorkspace(path: workspacePath)
-        for path in allPath {
-            //
-            print(path)
-        }
+//        for path in allPath {
+//            //
+//            print(path)
+//        }
         var allNodes = [OCNode]()
         
         let groupCount = 60 // 一组容纳个数

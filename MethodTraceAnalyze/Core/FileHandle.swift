@@ -39,10 +39,57 @@ public class FileHandle {
         }
     }
     
+    public static func fileSave(content:String, path:String) {
+        do {
+            try content.write(to: URL(fileURLWithPath: path), atomically: false, encoding: String.Encoding.utf8)
+        } catch {
+            //
+        }
+    }
+    
     // 保存文件到下载目录
     public static func writeToDownload(fileName: String, content: String) {
         try! content.write(toFile: "\(Config.downloadPath.rawValue)\(fileName)", atomically: true, encoding: String.Encoding.utf8)
     }
+    
+    public static func handlesFiles(allfilePath:[String], handle:@escaping(String,String)->Void) {
+        let handleBlock = handle
+        let groupCount = 60
+        let groupTotal = allfilePath.count / groupCount + 1
+        
+        var groups = [[String]]()
+        for i in 0..<groupTotal {
+            var group = [String]()
+            for j in i * groupCount..<(i+1) * groupCount {
+                if j < allfilePath.count {
+                    group.append(allfilePath[j])
+                }
+            }
+            if group.count > 0 {
+                groups.append(group)
+            }
+        } // end for
+        
+        for group in groups {
+            let dispatchGroup = DispatchGroup()
+            
+            for node in group {
+                dispatchGroup.enter()
+                let queue = DispatchQueue.global()
+                
+                queue.async {
+                    let content = FileHandle.fileContent(path: node)
+                    handleBlock(node, content)
+                    dispatchGroup.leave()
+                } // end queue async
+            } // end for
+            dispatchGroup.wait()
+        } // end for
+    } // end func handlesFiles
+}
+
+public class GroupFileHandle<T> {
+    
 }
 
 public struct File {

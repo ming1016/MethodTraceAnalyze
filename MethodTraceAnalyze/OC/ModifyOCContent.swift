@@ -8,6 +8,16 @@
 
 import Foundation
 
+public struct commentedOutUnUsedClassStruct {
+    var filePath: String
+    var lineStart: Int
+    var lineEnd: Int
+    var lineCount: Int          // 有多少行
+    var source: String          // 代码
+    var className: String       // 类名
+    var classIdentifier: String // 编号，
+}
+
 public class ModifyOCContent {
     private var filePath: String
     private var lineContent: [String]
@@ -21,21 +31,61 @@ public class ModifyOCContent {
     }
     
     // 注释掉无用的类
-    public func commentedOutUnUsedClass(unUsedClasses:Set<String>) {
-        enum State {
+    public func commentedOutUnUsedClass(unUsedClasses:Set<String>) -> [commentedOutUnUsedClassStruct] {
+        enum State:String {
             case normal
             case at
-            case atClass // 包含 interface、implementation、protocol
             case atInterface
             case atImplementation
             case atProtocol
+            
+            case atContent // 在 @ + 名字后到 @end 之间的内容
         }
+        
+        var reClasses = [commentedOutUnUsedClassStruct]()
         
         var currentState:State = .normal
         var currentLineStart = 0
+        var currentClassName = ""
+        var currentClassIdentifier = ""
         
+        var index = 0
         for aNode in tokenNodes {
+            index += 1
+            if currentState == .atContent {
+                if index < tokenNodes.count {
+                    let nextNode = tokenNodes[index]
+                    if "\(aNode.value)\(nextNode.value)" == "@end" {
+                        //
+                        var sourceContent = ""
+                        for i in currentLineStart..<aNode.line + 1 {
+                            if i < lineContent.count {
+                                sourceContent += "\(lineContent[i])\n"
+                            }
+                        }
+                        
+                        if unUsedClasses.contains(currentClassName) {
+                            reClasses.append(commentedOutUnUsedClassStruct(filePath: filePath, lineStart: currentLineStart, lineEnd: aNode.line, lineCount: aNode.line - currentLineStart, source: sourceContent, className: currentClassName, classIdentifier: currentClassIdentifier))
+                        }
+                        
+                        // 重置
+                        currentState = .normal
+                        currentLineStart = 0
+                        currentClassName = ""
+                        currentClassIdentifier = ""
+                    }
+                }
+                
+                continue
+            }
             
+            if currentState == .atInterface || currentState == .atImplementation || currentState == .atProtocol {
+                currentLineStart = aNode.line
+                currentClassName = aNode.value
+                currentClassIdentifier = "\(aNode.value)-\(currentState.rawValue)"
+                currentState = .atContent
+                continue
+            }
             
             if currentState == .at {
                 if aNode.value == "interface" {
@@ -57,6 +107,8 @@ public class ModifyOCContent {
                 continue
             }
         }
+        
+        return reClasses
         
     } // end func
 } // end class
