@@ -47,8 +47,6 @@ public class XcodeProjectParse {
                     
                 } // end for fileRef in workspace.subNodes
                 
-                
-                
             } // end for
         } // end for
         

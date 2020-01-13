@@ -23,9 +23,10 @@ public class ModifyOCContent {
     private var lineContent: [String]
     private var tokenNodes: [OCTokenNode]
     
-    public init(input: String, inputFilePath: String) {
+    public init(inputFilePath: String) {
         filePath = inputFilePath
-        let formatInput = input.replacingOccurrences(of: "\r\n", with: "\n")
+        let content = FileHandle.fileContent(path: inputFilePath)
+        let formatInput = content.replacingOccurrences(of: "\r\n", with: "\n")
         lineContent = formatInput.components(separatedBy: .newlines)
         tokenNodes = ParseOCTokens(input: formatInput).parse()
     }
@@ -82,7 +83,7 @@ public class ModifyOCContent {
             if currentState == .atInterface || currentState == .atImplementation || currentState == .atProtocol {
                 currentLineStart = aNode.line
                 currentClassName = aNode.value
-                currentClassIdentifier = "\(aNode.value)-\(currentState.rawValue)"
+                currentClassIdentifier = "\(aNode.value)-\(currentState.rawValue)-\(nowTimeInterval())"
                 currentState = .atContent
                 continue
             }

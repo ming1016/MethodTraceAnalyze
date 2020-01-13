@@ -11,26 +11,91 @@ import Foundation
 public class ParseOCMethodContent {
     
     static func unUsedClass(workSpacePath:String) -> Set<String> {
-        var baseClasses = Set<String>() // 过滤属于基类的类
+        var allBaseClasses = Set<String>() // 过滤属于基类的类
         var cellClasses = Set<String>() // 过滤 Cell 基类
         
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
         var allClassSet:Set<String> = Set()
+        var classAndBaseClass = [String:String]()
         for aNode in allNodes {
             if aNode.type == .class {
                 let classValue = aNode.value as! OCNodeClass
+
                 allClassSet.insert(classValue.className)
                 if classValue.baseClass.count > 0 {
-                    baseClasses.insert(classValue.baseClass)
+                    allBaseClasses.insert(classValue.baseClass)
+                    classAndBaseClass[classValue.className] = classValue.baseClass
                 }
-                if classValue.baseClasses.contains("UITableViewCell") || classValue.className.hasSuffix("Cell") {
-                    cellClasses.insert(classValue.className)
-                }
+                
                 
             }
         } // end for aNode in allNodes
         
+        // 找出类的继承链
+        
+        func recursiveBaseClass(className:String,baseClasses:Set<String>) -> Set<String> {
+            var reBaseClasses = baseClasses
+            guard let baseClass = classAndBaseClass[className] else {
+                return Set<String>()
+            }
+            
+            if baseClass != "NSObject" && classAndBaseClass[baseClass] != baseClass {
+                
+            } else {
+                return Set<String>()
+            }
+            
+            if className.hasPrefix("NS") || className.hasPrefix("UI") {
+                return Set<String>()
+            }
+            
+            // 以上是跳出递归的条件
+            reBaseClasses.insert(baseClass)
+            
+            let recursiveClasses = recursiveBaseClass(className: baseClass, baseClasses: baseClasses)
+            for aClass in recursiveClasses {
+                reBaseClasses.insert(aClass)
+            }
+            
+            return reBaseClasses
+        }
+        
+        var classWithBaseClasses = [String:Set<String>]() // 类的继承链
+        
+        for aClass in allClassSet {
+            //
+            let baseClasses = Set<String>()
+            guard let baseClass = classAndBaseClass[aClass] else {
+                continue
+            }
+            let reRecur = recursiveBaseClass(className: aClass, baseClasses: baseClasses)
+            if reRecur.count > 0 {
+                classWithBaseClasses[aClass] = reRecur
+            }
+        }
+        
+        // 通过类的继承链找出基类是 Cell 的，还有类名后缀是 Cell 的
+        for aNode in allNodes {
+            if aNode.type == .class {
+                let classValue = aNode.value as! OCNodeClass
+                
+                guard let nodeBaseClasses = classWithBaseClasses[classValue.className] else {
+                    continue
+                }
+                
+                if nodeBaseClasses.contains("UITableViewCell") {
+                    cellClasses.insert(classValue.className)
+                }
+                
+//                if classValue.className.hasSuffix("Cell") {
+//                    cellClasses.insert(classValue.className)
+//                }
+            }
+            
+        }
+        
+        // 开始递归检查无用类
         var recursiveCount = 0
         
         func recursiveCheckUnUsedClass(unUsed:Set<String>) -> Set<String> {
@@ -97,7 +162,7 @@ public class ParseOCMethodContent {
                 }
             }
             // 过滤基类
-            if baseClasses.contains(aSet) {
+            if allBaseClasses.contains(aSet) {
                 shouldFilter = true
             }
             // 过滤 cell
@@ -121,7 +186,7 @@ public class ParseOCMethodContent {
         var allData = [commentedOutUnUsedClassStruct]()
         var allClassInfo = [String:Int]()
         FileHandle.handlesFiles(allfilePath: allPath) { (filePath, fileContent) in
-            let classStructArr = ModifyOCContent(input: fileContent, inputFilePath: filePath).commentedOutUnUsedClass(unUsedClasses: unUsedClassFromRecursive)
+            let classStructArr = ModifyOCContent(inputFilePath: filePath).commentedOutUnUsedClass(unUsedClasses: unUsedClassFromRecursive)
             if classStructArr.count > 0 {
                 for classStruct in classStructArr {
                     allData.append(classStruct)
@@ -152,7 +217,11 @@ public class ParseOCMethodContent {
                 index += 1
             } // end for
             
+            // 后面加上时间主要是测试用，由于在文件名中加入了时间，会出现一个文件里多处修改会相互覆盖的问题。这个问题会在去除时间后解除。
             FileHandle.fileSave(content: newContent, path: "\(data.filePath)\(nowDateFormat())")
+            
+            // 统计
+            OCStatistics.unUsedClasses(className: data.className, classStruct: data)
         }
         
         FileHandle.writeToDownload(fileName: "ClassContent\(nowDateFormat())", content: saveStr)
@@ -190,7 +259,47 @@ public class ParseOCMethodContent {
         return usedClassSet
     }
     
-    // MARK:TODO:需要先解决变量名所属哪个类的问题，前置条件是全局变量、属性、临时变量得解出来。
+    
+    // Bundle 和 Class 的关系
+    private func loadClassBundle() -> [String:String] {
+        let path = Bundle.main.path(forResource: "ClassBundle1015", ofType: "csv")
+        let oPath = path ?? ""
+        
+        let content = FileHandle.fileContent(path: oPath)
+        
+        let tokens = Lexer(input: content, type: .plain).allTkFast(operaters: ",")
+        var allTks = [[Token]]()
+        var currentTks = [Token]()
+        for tk in tokens {
+            if tk == .newLine {
+                allTks.append(currentTks)
+                currentTks = [Token]()
+                continue
+            }
+            if tk == .id(",") {
+                continue
+            }
+            currentTks.append(tk)
+        }
+        
+        var classBundleDic = [String:String]()
+        for tks in allTks {
+            var i = 0
+            var currentKey = ""
+            for tk in tks {
+                if i == 0 {
+                    currentKey = tk.des()
+                }
+                if i == 1 {
+                    classBundleDic[currentKey] = tk.des()
+                }
+                i += 1
+            }
+        }
+        return classBundleDic
+    }
+    
+    // MARK:parseMethodCall TODO: 需要先解决变量名所属哪个类的问题，前置条件是全局变量、属性、临时变量得解出来。
     static func parseMethodCall(node:OCNode, allMethodReturns:[String:String]) -> [String] {
         guard node.type == .method else {
             return [String]()

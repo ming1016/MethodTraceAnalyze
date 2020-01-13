@@ -10,8 +10,17 @@ import Foundation
 
 public class OCStatistics {
     
+    // MARK: 无用类统计
+    static var unUsedClasses = [String:commentedOutUnUsedClassStruct]()
+    static func unUsedClasses(className:String, classStruct: commentedOutUnUsedClassStruct) {
+        runSerial {
+            unUsedClasses[className] = classStruct
+        }
+        
+    }
+    
     // MARK: 执行完后的统计
-    // 调用过的方法和调用次数
+    // TODO:调用过的方法和调用次数
     static var calledMethodAndCount = [String:Int]()
     static func calledMethodAndCount(methodId:String) {
         if calledMethodAndCount[methodId] != nil {
@@ -109,22 +118,20 @@ public class OCStatistics {
     }
     
     static func showAll() {
-        print("方法总数: \(OCStatistics.methodContent.keys.count)")
-        print("有基类的方法总数: \(OCStatistics.classAndBaseClass.keys.count)")
-        print("行总数: \(OCStatistics.fileLinesTotal)")
+        
+        var saveStr = ""
+        saveStr.append("无用类有: \(OCStatistics.unUsedClasses.count)\n")
+        saveStr.append("方法总数: \(OCStatistics.methodContent.keys.count)\n")
+        saveStr.append("行总数: \(OCStatistics.fileLinesTotal)\n")
+        
         // 按行排序
         let sortFileLines = fileLines.sortedByValue
+        saveStr.append("文件行数排序:")
         for (k,v) in sortFileLines {
-            print("\(k) \(v)")
+            saveStr.append("\(k) \(v)\n")
+            
         }
-//        print("没有源码的方法总数：\(OCStatistics.noSourceMethod.count)")
-//        print("没有源码的方法：")
-//        for method in OCStatistics.noSourceMethod {
-//            print(method)
-//        }
-//        print("使用父类方法的方法总数：\(OCStatistics.useBaseClassMethod.count)")
-//        for method in OCStatistics.useBaseClassMethod {
-//            print(method)
-//        }
+        print(saveStr)
+        FileHandle.writeToDownload(fileName: "Statistics\(nowDateFormat())", content: saveStr)
     }
 }

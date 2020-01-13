@@ -20,7 +20,7 @@ public enum OCNodeType {
     case method
 }
 
-// OCNode 值得的协议
+// OCNode 值的协议
 public protocol OCNodeValueProtocol {}
 
 // OC 语法树节点
@@ -58,14 +58,15 @@ public class ParseOCNodes {
     
     private var linesContent: [String]
     private var tokenNodes: [OCTokenNode]
+    private var inputFilePath: String
     
     // MARK: 初始化
     public init(input: String, filePath: String) {
+        inputFilePath = filePath
         let formatInput = input.replacingOccurrences(of: "\r\n", with: "\n")
         linesContent = formatInput.components(separatedBy: .newlines)
         // 统计文件对应行数
         OCStatistics.fileLine(filePath: filePath, lines: linesContent.count)
-        
         tokenNodes = ParseOCTokens(input: formatInput).parse()
     }
     
@@ -139,7 +140,10 @@ public class ParseOCNodes {
                     currentPairCount += 1
                     continue
                 } else if (tkNode.type == .eod || tkNode.value == ";") {
-                    
+                    // 如果文件是头文件，方法定义处理不一样
+                    if inputFilePath.hasSuffix(".h") {
+                        currentState = .normal
+                    }
                 } else {
                     currentState = .normal
                 }
@@ -332,6 +336,7 @@ public class ParseOCNodes {
                         if currentInterfaceParent.count > 0 {
                             OCStatistics.classAndBaseClass(aClass: currentInterfaceName, baseClass: currentInterfaceParent)
                         }
+                        
                         
                         let nodeClass = OCNodeClass(className: currentInterfaceName, baseClass: currentInterfaceParent, hMethod: [String](), mMethod: [String](), baseClasses: [String]())
                         pNode.subNodes.append(OCNode(type: .class, subNodes: [OCNode](), identifier:"\(currentInterfaceName)", lineRange: (0, 0), source: "", value: nodeClass))

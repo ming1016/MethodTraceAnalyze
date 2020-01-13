@@ -88,9 +88,6 @@ public class FileHandle {
     } // end func handlesFiles
 }
 
-public class GroupFileHandle<T> {
-    
-}
 
 public struct File {
     public let fileName:String // 文件名
