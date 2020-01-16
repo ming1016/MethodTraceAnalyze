@@ -13,11 +13,17 @@ public class ParseOCMethodContent {
     static func unUsedClass(workSpacePath:String) -> Set<String> {
         var allBaseClasses = Set<String>() // 过滤属于基类的类
         var cellClasses = Set<String>() // 过滤 Cell 基类
+        var methodDefineUseClasses = Set<String>() // 过滤方法定义时用过的类
+        var propertyTypes = Set<String>() // 过滤属性使用的类
         
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
+        // 所有类
         var allClassSet:Set<String> = Set()
+        // 所有类和基类的关系
         var classAndBaseClass = [String:String]()
+        
+        
         for aNode in allNodes {
             if aNode.type == .class {
                 let classValue = aNode.value as! OCNodeClass
@@ -27,10 +33,32 @@ public class ParseOCMethodContent {
                     allBaseClasses.insert(classValue.baseClass)
                     classAndBaseClass[classValue.className] = classValue.baseClass
                 }
+                if classValue.properties.count > 0 {
+                    //
+                    for aProperty in classValue.properties {
+                        propertyTypes.insert(aProperty.type)
+                    }
+                }
                 
-                
+            } // end if aNode.type == .class
+            
+            if aNode.type == .method {
+                let methodValue = aNode.value as! OCNodeMethod
+                methodDefineUseClasses.insert(methodValue.returnType)
+                if methodValue.paramTypes.count > 0 {
+                    for aPType in methodValue.paramTypes {
+                        methodDefineUseClasses.insert(aPType)
+                    }
+                }
             }
+            
         } // end for aNode in allNodes
+        
+        print("过滤方法定义时用过的类")
+        print(methodDefineUseClasses)
+        
+        print("过滤属性使用的类")
+        print(propertyTypes)
         
         // 找出类的继承链
         
@@ -138,7 +166,7 @@ public class ParseOCMethodContent {
                     unUsedClassSet.insert(aSet)
                     hasUnUsed = true
                 }
-            }
+            } // end for
             
             if hasUnUsed {
                 // 如果发现还有无用的类，需要继续递归调用进行分析
@@ -167,6 +195,16 @@ public class ParseOCMethodContent {
             }
             // 过滤 cell
             if cellClasses.contains(aSet) {
+                shouldFilter = true
+            }
+            
+            // 过滤方法定义时用的类
+            if methodDefineUseClasses.contains(aSet) {
+                shouldFilter = true
+            }
+            
+            // 过滤属性用到的类
+            if propertyTypes.contains(aSet) {
                 shouldFilter = true
             }
             
@@ -218,7 +256,7 @@ public class ParseOCMethodContent {
             } // end for
             
             // 后面加上时间主要是测试用，由于在文件名中加入了时间，会出现一个文件里多处修改会相互覆盖的问题。这个问题会在去除时间后解除。
-            FileHandle.fileSave(content: newContent, path: "\(data.filePath)\(nowDateFormat())")
+            FileHandle.fileSave(content: newContent, path: "\(data.filePath)")
             
             // 统计
             OCStatistics.unUsedClasses(className: data.className, classStruct: data)
@@ -228,11 +266,19 @@ public class ParseOCMethodContent {
         
         let sortedClassInfo = allClassInfo.sortedByValue
         
-        var saveInfoStr = ""
+        // 生成Excel，内容包括类名，对应的行、bundle、owner
+        let classBundleOwner = ParseOCMethodContent.loadClassBundleOwner()
+        var saveInfoStr = "类名,行,Bundle,Owner\n"
         var totalLine = 0
         for (k,v) in sortedClassInfo {
             //
-            saveInfoStr += "name:\(k) line:\(v)\n"
+            let className = k.components(separatedBy: "-")[0]
+            
+            guard let kClassBundleOwner = classBundleOwner[className] else {
+                continue
+            }
+            let (bundle,owner) = kClassBundleOwner
+            saveInfoStr += "\(k),\(v),\(bundle),\(owner)\n"
             totalLine += v
         }
         saveInfoStr = "总代码行：\(totalLine)\n" + saveInfoStr
@@ -261,11 +307,9 @@ public class ParseOCMethodContent {
     
     
     // Bundle 和 Class 的关系
-    private func loadClassBundle() -> [String:String] {
-        let path = Bundle.main.path(forResource: "ClassBundle1015", ofType: "csv")
-        let oPath = path ?? ""
+    static func loadClassBundleOwner() -> [String:(String,String)] {
         
-        let content = FileHandle.fileContent(path: oPath)
+        let content = FileHandle.fileContent(path: Config.classBundleOwner.rawValue)
         
         let tokens = Lexer(input: content, type: .plain).allTkFast(operaters: ",")
         var allTks = [[Token]]()
@@ -282,22 +326,126 @@ public class ParseOCMethodContent {
             currentTks.append(tk)
         }
         
-        var classBundleDic = [String:String]()
+        var classBundleOwnerDic = [String:(String,String)]()
         for tks in allTks {
             var i = 0
-            var currentKey = ""
+            var currentClass = ""
+            var currentBundle = ""
+            var currentOwner = ""
             for tk in tks {
                 if i == 0 {
-                    currentKey = tk.des()
+                    // class
+                    currentClass = tk.des()
                 }
                 if i == 1 {
-                    classBundleDic[currentKey] = tk.des()
+                    // bundle
+                    currentBundle = tk.des()
+                }
+                if i == 2 {
+                    // owner
+                    currentOwner = tk.des()
+                }
+                i += 1
+            }
+            classBundleOwnerDic[currentClass] = (currentBundle,currentOwner)
+        }
+        return classBundleOwnerDic
+    }
+    
+    static func parseClassAndBundle() {
+        
+        let content = FileHandle.fileContent(path: Config.classBundleOnwerOrigin.rawValue)
+        let contentWithoutWhiteSpace = content.replacingOccurrences(of: " ", with: "")
+        let tokens = Lexer(input: contentWithoutWhiteSpace, type: .plain).allTkFast(operaters: ",")
+        var allTks = [[Token]]()
+        var currentTks = [Token]()
+        for tk in tokens {
+            if tk == .newLine {
+                allTks.append(currentTks)
+                currentTks = [Token]()
+                continue
+            }
+            if tk == .id(",") {
+                continue
+            }
+            currentTks.append(tk)
+        }
+        //print(allTks)
+        allTks.remove(at: 0)
+        var classBundleDic = [String:String]()
+        var ownerBundleDic = [String:String]()
+        for tks in allTks {
+            var i = 0
+            var currentBundle = ""
+            var currentClass = ""
+            for tk in tks {
+                if i == 0 {
+                    currentBundle = tk.des()
+                }
+                if i == 1 {
+                    currentClass = tk.des()
+                    classBundleDic[currentClass] = currentBundle
+                    
+                }
+                if i == 2 {
+                    ownerBundleDic[currentClass] = tk.des()
                 }
                 i += 1
             }
         }
-        return classBundleDic
+        var str = ""
+        for (k,v) in classBundleDic {
+            guard let owner = ownerBundleDic[k] else {
+                continue
+            }
+            str.append("\(k),\(v),\(owner)\n")
+        }
+        try! str.write(toFile: "/Users/ming/Downloads/ClassBundle1025.csv", atomically: true, encoding: String.Encoding.utf8)
     }
+    
+    // MARK:辅助方法
+    // 遍历所有节点
+    
+    struct FilterClassData {
+        var allClassSet: Set<String>
+        var allBaseClasses: Set<String>
+        var propertyTypes: Set<String>
+        var methodDefineUseClasses: Set<String>
+        var classAndBaseClass: [String:String]
+        
+    }
+    
+    static func traverseAllNodes(allNodes:[OCNode]) {
+        var filterClassData = FilterClassData(allClassSet: Set<String>(), allBaseClasses: Set<String>(), propertyTypes: Set<String>(), methodDefineUseClasses: Set<String>(), classAndBaseClass: [String:String]())
+        for aNode in allNodes {
+            if aNode.type == .class {
+                let classValue = aNode.value as! OCNodeClass
+    
+                filterClassData.allClassSet.insert(classValue.className)
+                if classValue.baseClass.count > 0 {
+                    filterClassData.allBaseClasses.insert(classValue.baseClass)
+                    filterClassData.classAndBaseClass[classValue.className] =   classValue.baseClass
+                }
+                if classValue.properties.count > 0 {
+                    //
+                    for aProperty in classValue.properties {
+                        filterClassData.propertyTypes.insert(aProperty.type)
+                    }
+                }
+            
+            } // end if aNode.type == .class
+            
+            if aNode.type == .method {
+                let methodValue = aNode.value as! OCNodeMethod
+                    filterClassData.methodDefineUseClasses.insert(methodValue   .returnType)
+                if methodValue.paramTypes.count > 0 {
+                    for aPType in methodValue.paramTypes {
+                        filterClassData.methodDefineUseClasses.insert(aPType)
+                    }
+                }
+            } // end if aNode.type == .method
+        } // end for aNode in allNodes
+    } // end func
     
     // MARK:parseMethodCall TODO: 需要先解决变量名所属哪个类的问题，前置条件是全局变量、属性、临时变量得解出来。
     static func parseMethodCall(node:OCNode, allMethodReturns:[String:String]) -> [String] {

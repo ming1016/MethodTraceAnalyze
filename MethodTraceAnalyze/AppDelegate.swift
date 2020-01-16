@@ -38,14 +38,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        TestXcodeproj.testSection()
         
 //        TestOC().testWorkspace()
-//        TestOC.testM(filePath: Config.aMFilePath.rawValue)
+
 //        TestOC.testOC()
 //        TestOC.testMethodCall(filePath: Config.aMFilePath.rawValue)
 //        TestOC.testUnUsedClass(filePath: Config.aMFilePath.rawValue)
+//        LaunchJSON.exportAll()
+
+//        TestOC.testM(filePath: Config.aMFilePath.rawValue)
         
         let _ = ParseOCMethodContent.unUsedClass(workSpacePath: Config.workPath.rawValue)
-        
-//        LaunchJSON.exportAll()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
             OCStatistics.showAll()
         }

@@ -40,18 +40,28 @@ public struct OCNodeDefaultValue: OCNodeValueProtocol {
     }
 }
 
+// 方法
 public struct OCNodeMethod: OCNodeValueProtocol {
     public var belongClass: String
-    public var methodName: String
+    public var methodName: String    // 方法名
+    public var returnType: String    // 返回类型
+    public var paramTypes: [String]  // 所有参数类型
     public var tokenNodes: [OCTokenNode]
 }
 
+// 类
 public struct OCNodeClass: OCNodeValueProtocol {
     public var className: String
     public var baseClass: String
-    public var hMethod: [String]
-    public var mMethod: [String]
+    public var hMethod: [String] // 头文件方法
+    public var mMethod: [String] // 实现文件的方法
     public var baseClasses: [String]
+    public var properties: [OCProperty] // 属性
+}
+
+// 属性
+public struct OCProperty {
+    public var type: String
 }
 
 public class ParseOCNodes {
@@ -84,6 +94,7 @@ public class ParseOCNodes {
         
         // 方法
         case methodStart           // 方法开始
+        case methodReturnStart     // 方法返回类型开始
         case methodReturnEnd       // 方法返回类型结束
         case methodNameEnd         // 方法名结束
         case methodParamStart      // 方法参数开始
@@ -106,6 +117,9 @@ public class ParseOCNodes {
         case atInterfaceParent     // @interface name : base
         case atInterfaceContent    // @interface 里内容
         case atProperty            // @property
+        case atPropertyDesStart    // @property(
+        case atPropertyDesEnd      // @property(nonatomic, weak, readonly)
+        case atPropertyTypeEnd     // @property(nonatomic, weak, readonly) NSString
         
         // #
         case numberSign            // #
@@ -126,14 +140,20 @@ public class ParseOCNodes {
         var currentInterfaceName = ""
         var currentInterfaceParent = ""
         
+        // property
+        var currentProperties = [OCProperty]()
+        
         // method
         var currentMethodName = ""
         var currentClassName = ""
+        var currentMethodReturnType = ""
+        var currentMethodParamTypes = [String]()
         
         // method content
         var currentMethodTokenNodes = [OCTokenNode]()
         
         for tkNode in nodes {
+            // MARK:方法
             if currentState == .methodShouldEnd {
                 if tkNode.value == "{" {
                     currentState = .methodContentStart
@@ -169,11 +189,13 @@ public class ParseOCNodes {
                             }
                         }
                         let identifier = "[\(currentClassName)]\(currentMethodName)"
-                        let methodValue = OCNodeMethod(belongClass: currentClassName, methodName: currentMethodName, tokenNodes: currentMethodTokenNodes)
+                        let methodValue = OCNodeMethod(belongClass: currentClassName, methodName: currentMethodName, returnType: currentMethodReturnType, paramTypes: currentMethodParamTypes, tokenNodes: currentMethodTokenNodes)
                         pNode.subNodes.append(OCNode(type: .method, subNodes: [OCNode](), identifier:identifier, lineRange: (currentStartLine, tkNode.line), source: sourceContent, value: methodValue))
                         // 重置 current
                         currentState = .normal
                         currentMethodName = ""
+                        currentMethodReturnType = ""
+                        currentMethodParamTypes = [String]()
                         currentMethodTokenNodes = [OCTokenNode]()
                         currentStartLine = 0
                         currentPairCount = 0
@@ -210,10 +232,20 @@ public class ParseOCNodes {
                 continue
             }
             
+            // -(Bool)foo:(Bool
+            if currentState == .methodParamTypeStart {
+                currentMethodParamTypes.append(tkNode.value)
+                currentState = .methodParamStart
+                continue
+            }
+            
             if currentState == .methodParamStart {
                 // -(Bool)foo:(Bool)
                 if tkNode.value == "(" {
                     currentPairCount += 1
+                    if currentPairCount == 1 {
+                        currentState = .methodParamTypeStart
+                    }
                     continue
                 }
                 if tkNode.value == ")" {
@@ -258,9 +290,19 @@ public class ParseOCNodes {
                 continue
             }
             
+            // -(
+            if currentState == .methodReturnStart {
+                currentMethodReturnType = tkNode.value
+                currentState = .methodStart
+                continue
+            }
+            
             if currentState == .methodStart {
                 if tkNode.value == "(" {
                     currentPairCount += 1
+                    if currentPairCount == 1 {
+                        currentState = .methodReturnStart
+                    }
                     continue
                 }
                 if tkNode.value == ")" {
@@ -273,6 +315,7 @@ public class ParseOCNodes {
                 continue
             }
             
+            // MARK: 不同@状态的
             // @implementation
             if currentState == .atImplementation {
                 currentClassName = tkNode.value
@@ -312,8 +355,40 @@ public class ParseOCNodes {
                 continue
             }
             
-            // @符号的处理
+            // @property 属性
+            
+            // @property(nonatomic, weak, readonly) NSString
+            if currentState == .atPropertyTypeEnd {
+                if tkNode.value == ";" {
+                    currentState = .normal
+                }
+                continue
+            }
+            
+            // @property(nonatomic, weak, readonly)
+            if currentState == .atPropertyDesEnd {
+                currentProperties.append(OCProperty(type: tkNode.value))
+                currentState = .atPropertyTypeEnd
+                continue
+            }
+            
+            // @property
+            if currentState == .atProperty {
+                
+                if tkNode.value == ")" {
+                    currentState = .atPropertyDesEnd
+                }
+                
+                continue
+            }
+            
+            // MARK:@符号的处理
             if currentState == .at {
+                
+                if tkNode.value == "property" {
+                    currentState = .atProperty
+                    continue
+                }
                 
                 if tkNode.value == "implementation" {
                     currentState = .atImplementation
@@ -338,11 +413,12 @@ public class ParseOCNodes {
                         }
                         
                         
-                        let nodeClass = OCNodeClass(className: currentInterfaceName, baseClass: currentInterfaceParent, hMethod: [String](), mMethod: [String](), baseClasses: [String]())
+                        let nodeClass = OCNodeClass(className: currentInterfaceName, baseClass: currentInterfaceParent, hMethod: [String](), mMethod: [String](), baseClasses: [String](), properties: currentProperties)
                         pNode.subNodes.append(OCNode(type: .class, subNodes: [OCNode](), identifier:"\(currentInterfaceName)", lineRange: (0, 0), source: "", value: nodeClass))
                         
                         currentInterfaceName = ""
                         currentInterfaceParent = ""
+                        currentProperties = [OCProperty]()
                     }
                     continue
                 }
@@ -384,11 +460,13 @@ public class ParseOCNodes {
                         // 拼装
                         let currentTime = Date().timeIntervalSince1970
                         let identifier = "identifier\(currentTime)"
-                        let methodValue = OCNodeMethod(belongClass: "class\(currentTime)", methodName: "method\(currentTime)", tokenNodes: currentMethodTokenNodes)
+                        let methodValue = OCNodeMethod(belongClass: "class\(currentTime)", methodName: "method\(currentTime)", returnType: currentMethodReturnType, paramTypes: currentMethodParamTypes, tokenNodes: currentMethodTokenNodes)
                         pNode.subNodes.append(OCNode(type: .method, subNodes: [OCNode](), identifier: identifier, lineRange: (currentStartLine, tkNode.line), source: sourceContent, value: methodValue))
                         // 重置
                         currentState = .normal
                         currentMethodName = ""
+                        currentMethodReturnType = ""
+                        currentMethodParamTypes = [String]()
                         currentMethodTokenNodes = [OCTokenNode]()
                         currentStartLine = 0
                         currentPairCount = 0
