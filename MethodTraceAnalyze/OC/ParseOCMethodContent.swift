@@ -10,65 +10,40 @@ import Foundation
 
 public class ParseOCMethodContent {
     
+    
+    struct FilterClassData {
+        var allClassSet: Set<String>             // 所有类
+        var allBaseClasses: Set<String>          // 过滤属于基类的类
+        var propertyTypes: Set<String>           // 过滤属性使用的类
+        var methodDefineUseClasses: Set<String>  // 过滤方法定义时用过的类
+        var classAndBaseClass: [String:String]   // 所有类和基类的关系
+        var cellClasses: Set<String>             // 过滤 Cell 基类
+    }
     static func unUsedClass(workSpacePath:String) -> Set<String> {
-        var allBaseClasses = Set<String>() // 过滤属于基类的类
-        var cellClasses = Set<String>() // 过滤 Cell 基类
-        var methodDefineUseClasses = Set<String>() // 过滤方法定义时用过的类
-        var propertyTypes = Set<String>() // 过滤属性使用的类
+        var cellClasses = Set<String>()
         
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
-        // 所有类
-        var allClassSet:Set<String> = Set()
-        // 所有类和基类的关系
-        var classAndBaseClass = [String:String]()
+        
+        var filterClassData = traverseAllNodes(allNodes: allNodes)
         
         
-        for aNode in allNodes {
-            if aNode.type == .class {
-                let classValue = aNode.value as! OCNodeClass
-
-                allClassSet.insert(classValue.className)
-                if classValue.baseClass.count > 0 {
-                    allBaseClasses.insert(classValue.baseClass)
-                    classAndBaseClass[classValue.className] = classValue.baseClass
-                }
-                if classValue.properties.count > 0 {
-                    //
-                    for aProperty in classValue.properties {
-                        propertyTypes.insert(aProperty.type)
-                    }
-                }
-                
-            } // end if aNode.type == .class
-            
-            if aNode.type == .method {
-                let methodValue = aNode.value as! OCNodeMethod
-                methodDefineUseClasses.insert(methodValue.returnType)
-                if methodValue.paramTypes.count > 0 {
-                    for aPType in methodValue.paramTypes {
-                        methodDefineUseClasses.insert(aPType)
-                    }
-                }
-            }
-            
-        } // end for aNode in allNodes
         
         print("过滤方法定义时用过的类")
-        print(methodDefineUseClasses)
+        print(filterClassData.methodDefineUseClasses)
         
         print("过滤属性使用的类")
-        print(propertyTypes)
+        print(filterClassData.propertyTypes)
         
         // 找出类的继承链
         
         func recursiveBaseClass(className:String,baseClasses:Set<String>) -> Set<String> {
             var reBaseClasses = baseClasses
-            guard let baseClass = classAndBaseClass[className] else {
+            guard let baseClass = filterClassData.classAndBaseClass[className] else {
                 return Set<String>()
             }
             
-            if baseClass != "NSObject" && classAndBaseClass[baseClass] != baseClass {
+            if baseClass != "NSObject" && filterClassData.classAndBaseClass[baseClass] != baseClass {
                 
             } else {
                 return Set<String>()
@@ -91,10 +66,10 @@ public class ParseOCMethodContent {
         
         var classWithBaseClasses = [String:Set<String>]() // 类的继承链
         
-        for aClass in allClassSet {
+        for aClass in filterClassData.allClassSet {
             //
             let baseClasses = Set<String>()
-            guard let baseClass = classAndBaseClass[aClass] else {
+            guard let baseClass = filterClassData.classAndBaseClass[aClass] else {
                 continue
             }
             let reRecur = recursiveBaseClass(className: aClass, baseClasses: baseClasses)
@@ -137,8 +112,8 @@ public class ParseOCMethodContent {
             
             // 缩小范围
             for aUnUsed in unUsedClassSet {
-                if allClassSet.contains(aUnUsed) {
-                    allClassSet.remove(aUnUsed)
+                if filterClassData.allClassSet.contains(aUnUsed) {
+                    filterClassData.allClassSet.remove(aUnUsed)
                 }
             }
             
@@ -151,7 +126,7 @@ public class ParseOCMethodContent {
                         continue
                     }
                     
-                    let usedSet = ParseOCMethodContent.parseAMethodUsedClass(node: aNode, allClass: allClassSet)
+                    let usedSet = ParseOCMethodContent.parseAMethodUsedClass(node: aNode, allClass: filterClassData.allClassSet)
                     if usedSet.count > 0 {
                         for aSet in usedSet {
                             allUsedClassSet.insert(aSet)
@@ -161,7 +136,7 @@ public class ParseOCMethodContent {
             } // end for aNode in allNodes
             var hasUnUsed = false
             // 找出无用类
-            for aSet in allClassSet {
+            for aSet in filterClassData.allClassSet {
                 if !allUsedClassSet.contains(aSet) {
                     unUsedClassSet.insert(aSet)
                     hasUnUsed = true
@@ -190,7 +165,7 @@ public class ParseOCMethodContent {
                 }
             }
             // 过滤基类
-            if allBaseClasses.contains(aSet) {
+            if filterClassData.allBaseClasses.contains(aSet) {
                 shouldFilter = true
             }
             // 过滤 cell
@@ -199,12 +174,12 @@ public class ParseOCMethodContent {
             }
             
             // 过滤方法定义时用的类
-            if methodDefineUseClasses.contains(aSet) {
+            if filterClassData.methodDefineUseClasses.contains(aSet) {
                 shouldFilter = true
             }
             
             // 过滤属性用到的类
-            if propertyTypes.contains(aSet) {
+            if filterClassData.propertyTypes.contains(aSet) {
                 shouldFilter = true
             }
             
@@ -406,17 +381,10 @@ public class ParseOCMethodContent {
     // MARK:辅助方法
     // 遍历所有节点
     
-    struct FilterClassData {
-        var allClassSet: Set<String>
-        var allBaseClasses: Set<String>
-        var propertyTypes: Set<String>
-        var methodDefineUseClasses: Set<String>
-        var classAndBaseClass: [String:String]
-        
-    }
     
-    static func traverseAllNodes(allNodes:[OCNode]) {
-        var filterClassData = FilterClassData(allClassSet: Set<String>(), allBaseClasses: Set<String>(), propertyTypes: Set<String>(), methodDefineUseClasses: Set<String>(), classAndBaseClass: [String:String]())
+    
+    static func traverseAllNodes(allNodes:[OCNode]) -> FilterClassData {
+        var filterClassData = FilterClassData(allClassSet: Set<String>(), allBaseClasses: Set<String>(), propertyTypes: Set<String>(), methodDefineUseClasses: Set<String>(), classAndBaseClass: [String:String](), cellClasses: Set<String>())
         for aNode in allNodes {
             if aNode.type == .class {
                 let classValue = aNode.value as! OCNodeClass
@@ -445,6 +413,7 @@ public class ParseOCMethodContent {
                 }
             } // end if aNode.type == .method
         } // end for aNode in allNodes
+        return filterClassData
     } // end func
     
     // MARK:parseMethodCall TODO: 需要先解决变量名所属哪个类的问题，前置条件是全局变量、属性、临时变量得解出来。
