@@ -32,6 +32,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func export() {
+        ParseMachO.run()
+        
 //        TestJSON.codeLines()
 //        TestJSON.testJSON()
 //        TestXML.testXcodeWorkspace()
@@ -45,11 +47,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        LaunchJSON.exportAll()
 
 //        TestOC.testM(filePath: Config.aMFilePath.rawValue)
-        
-        let _ = ParseOCMethodContent.unUsedClass(workSpacePath: Config.workPath.rawValue)
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
-            OCStatistics.showAll()
-        }
+//        FindWhoUseClassAndFunction.whoUseClass(workSpacePath: Config.workPath(), className: "UIAlertView")
+//        let _ = ParseOCMethodContent.unUsedClass(workSpacePath: Config.workPath())
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5) {
+//            OCStatistics.showAll()
+//        }
         
     }
 

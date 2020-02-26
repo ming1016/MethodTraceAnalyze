@@ -34,6 +34,11 @@
 		3A3823E22393ED2500CB52C0 /* subscription.xml in Resources */ = {isa = PBXBuildFile; fileRef = 3A3823DF2393ED2500CB52C0 /* subscription.xml */; };
 		3A708A2423A09CE6000C0D03 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A708A2323A09CE6000C0D03 /* Config.swift */; };
 		3A9136CC239A774A0073BFAE /* ParseOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9136CB239A774A0073BFAE /* ParseOC.swift */; };
+		3ACF9EBE23F4ED2E004FE794 /* FindWhoUseClassAndFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9EBD23F4ED2E004FE794 /* FindWhoUseClassAndFunction.swift */; };
+		3ACF9EC023F69896004FE794 /* OCApplyFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9EBF23F69896004FE794 /* OCApplyFeature.swift */; };
+		3ACF9EC323FE5637004FE794 /* SUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9EC223FE5637004FE794 /* SUITextField.swift */; };
+		3ACF9EC523FE566B004FE794 /* SUIText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9EC423FE566B004FE794 /* SUIText.swift */; };
+		3ACF9EC82404CDCA004FE794 /* ParseMachO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACF9EC72404CDCA004FE794 /* ParseMachO.swift */; };
 		3AE35CD323C5C660003B0B78 /* ParseOCClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE35CD223C5C660003B0B78 /* ParseOCClass.swift */; };
 		3AE79FB523BF1CA800B362BC /* ModifyOCContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79FB423BF1CA800B362BC /* ModifyOCContent.swift */; };
 		3AED19B6239202F0006A2F48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED19B5239202F0006A2F48 /* AppDelegate.swift */; };
@@ -100,6 +105,11 @@
 		3A3823DF2393ED2500CB52C0 /* subscription.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = subscription.xml; sourceTree = "<group>"; };
 		3A708A2323A09CE6000C0D03 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		3A9136CB239A774A0073BFAE /* ParseOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOC.swift; sourceTree = "<group>"; };
+		3ACF9EBD23F4ED2E004FE794 /* FindWhoUseClassAndFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindWhoUseClassAndFunction.swift; sourceTree = "<group>"; };
+		3ACF9EBF23F69896004FE794 /* OCApplyFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCApplyFeature.swift; sourceTree = "<group>"; };
+		3ACF9EC223FE5637004FE794 /* SUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUITextField.swift; sourceTree = "<group>"; };
+		3ACF9EC423FE566B004FE794 /* SUIText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUIText.swift; sourceTree = "<group>"; };
+		3ACF9EC72404CDCA004FE794 /* ParseMachO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseMachO.swift; sourceTree = "<group>"; };
 		3AE35CD223C5C660003B0B78 /* ParseOCClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseOCClass.swift; sourceTree = "<group>"; };
 		3AE79FB423BF1CA800B362BC /* ModifyOCContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyOCContent.swift; sourceTree = "<group>"; };
 		3AED19B2239202F0006A2F48 /* MethodTraceAnalyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MethodTraceAnalyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +189,8 @@
 		3A3823C52393E8AB00CB52C0 /* OC */ = {
 			isa = PBXGroup;
 			children = (
+				3ACF9EC62404CCC9004FE794 /* MachO */,
+				3ACF9EBC23F40CC8004FE794 /* Apply */,
 				3AEDBC3D23B361EE0016B9EF /* ParseOCMethodContent.swift */,
 				3AE35CD223C5C660003B0B78 /* ParseOCClass.swift */,
 				3A9136CB239A774A0073BFAE /* ParseOC.swift */,
@@ -209,6 +221,32 @@
 				3A708A2323A09CE6000C0D03 /* Config.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		3ACF9EBC23F40CC8004FE794 /* Apply */ = {
+			isa = PBXGroup;
+			children = (
+				3ACF9EBD23F4ED2E004FE794 /* FindWhoUseClassAndFunction.swift */,
+				3ACF9EBF23F69896004FE794 /* OCApplyFeature.swift */,
+			);
+			path = Apply;
+			sourceTree = "<group>";
+		};
+		3ACF9EC123FE54E7004FE794 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3ACF9EC223FE5637004FE794 /* SUITextField.swift */,
+				3ACF9EC423FE566B004FE794 /* SUIText.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		3ACF9EC62404CCC9004FE794 /* MachO */ = {
+			isa = PBXGroup;
+			children = (
+				3ACF9EC72404CDCA004FE794 /* ParseMachO.swift */,
+			);
+			path = MachO;
 			sourceTree = "<group>";
 		};
 		3AED19A9239202F0006A2F48 = {
@@ -244,6 +282,7 @@
 				3AED19E623923987006A2F48 /* Data */,
 				3AED19B5239202F0006A2F48 /* AppDelegate.swift */,
 				3AED19B7239202F0006A2F48 /* ContentView.swift */,
+				3ACF9EC123FE54E7004FE794 /* UI */,
 				3AED19B9239202F2006A2F48 /* Assets.xcassets */,
 				3AED19BE239202F2006A2F48 /* Main.storyboard */,
 				3AED19C1239202F2006A2F48 /* Info.plist */,
@@ -462,12 +501,15 @@
 				3AED1A132392C5F8006A2F48 /* TestJSON.swift in Sources */,
 				3A3823D92393ECE100CB52C0 /* ParseStandXMLTags.swift in Sources */,
 				3A3823BF2393E84200CB52C0 /* ParseXcodeprojTokens.swift in Sources */,
+				3ACF9EBE23F4ED2E004FE794 /* FindWhoUseClassAndFunction.swift in Sources */,
 				3AED1A0F2392C5CE006A2F48 /* ParseJSONTokens.swift in Sources */,
+				3ACF9EC323FE5637004FE794 /* SUITextField.swift in Sources */,
 				3A3823B32393E7BA00CB52C0 /* ParseLaunchJSON.swift in Sources */,
 				3A3823D12393E92400CB52C0 /* XcodeProjectParse.swift in Sources */,
 				3A3823B52393E7D600CB52C0 /* LaunchJSON.swift in Sources */,
 				3A3823BD2393E84200CB52C0 /* ParseXcodeprojSource.swift in Sources */,
 				3AED1A062392A517006A2F48 /* FileHandle.swift in Sources */,
+				3ACF9EC023F69896004FE794 /* OCApplyFeature.swift in Sources */,
 				3AE35CD323C5C660003B0B78 /* ParseOCClass.swift in Sources */,
 				3A3823BE2393E84200CB52C0 /* ParseXcodeprojSection.swift in Sources */,
 				3A3823DC2393ECF500CB52C0 /* TestXML.swift in Sources */,
@@ -475,10 +517,12 @@
 				3A3823C02393E84200CB52C0 /* ParseXcodeprojTreeNode.swift in Sources */,
 				3A3823C22393E86C00CB52C0 /* TestXcodeproj.swift in Sources */,
 				3A708A2423A09CE6000C0D03 /* Config.swift in Sources */,
+				3ACF9EC82404CDCA004FE794 /* ParseMachO.swift in Sources */,
 				3AED19B8239202F0006A2F48 /* ContentView.swift in Sources */,
 				3AED1A072392A517006A2F48 /* Test.swift in Sources */,
 				3AED1A042392A517006A2F48 /* Handy.swift in Sources */,
 				3A3823CD2393E8DD00CB52C0 /* TestOC.swift in Sources */,
+				3ACF9EC523FE566B004FE794 /* SUIText.swift in Sources */,
 				3A3823D32393EAAF00CB52C0 /* Dictionary.swift in Sources */,
 				3AED1A102392C5CE006A2F48 /* ParseJSONItem.swift in Sources */,
 				3A3823CB2393E8C600CB52C0 /* ParseOCNodes.swift in Sources */,

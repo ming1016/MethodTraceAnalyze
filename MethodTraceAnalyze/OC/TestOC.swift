@@ -12,7 +12,7 @@ public class TestOC: Test {
     
     public func testWorkspace() {
         
-        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath())
   
         var saveStr = ""
         for aNode in allNodes {
@@ -41,7 +41,7 @@ public class TestOC: Test {
     }
     
     public static func testUnUsedClass(filePath:String) {
-        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath())
 //        var classSet:Set = ["NSObject"]
         var classSet:Set<String> = Set()
         for aNode in allNodes {

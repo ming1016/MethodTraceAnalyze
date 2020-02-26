@@ -10,7 +10,6 @@ import Foundation
 
 public class ParseOCMethodContent {
     
-    
     struct FilterClassData {
         var allClassSet: Set<String>             // 所有类
         var allBaseClasses: Set<String>          // 过滤属于基类的类
@@ -22,61 +21,14 @@ public class ParseOCMethodContent {
     static func unUsedClass(workSpacePath:String) -> Set<String> {
         var cellClasses = Set<String>()
         
+        
         let allNodes = ParseOC.ocNodes(workspacePath: workSpacePath)
         
+        // 找出所有数据，所有类、有基类的类
+        var filterClassData = ParseOCMethodContent.traverseAllNodesForFilterData(allNodes: allNodes)
         
-        var filterClassData = traverseAllNodes(allNodes: allNodes)
-        
-        
-        
-        print("过滤方法定义时用过的类")
-        print(filterClassData.methodDefineUseClasses)
-        
-        print("过滤属性使用的类")
-        print(filterClassData.propertyTypes)
-        
-        // 找出类的继承链
-        
-        func recursiveBaseClass(className:String,baseClasses:Set<String>) -> Set<String> {
-            var reBaseClasses = baseClasses
-            guard let baseClass = filterClassData.classAndBaseClass[className] else {
-                return Set<String>()
-            }
-            
-            if baseClass != "NSObject" && filterClassData.classAndBaseClass[baseClass] != baseClass {
-                
-            } else {
-                return Set<String>()
-            }
-            
-            if className.hasPrefix("NS") || className.hasPrefix("UI") {
-                return Set<String>()
-            }
-            
-            // 以上是跳出递归的条件
-            reBaseClasses.insert(baseClass)
-            
-            let recursiveClasses = recursiveBaseClass(className: baseClass, baseClasses: baseClasses)
-            for aClass in recursiveClasses {
-                reBaseClasses.insert(aClass)
-            }
-            
-            return reBaseClasses
-        }
-        
-        var classWithBaseClasses = [String:Set<String>]() // 类的继承链
-        
-        for aClass in filterClassData.allClassSet {
-            //
-            let baseClasses = Set<String>()
-            guard let baseClass = filterClassData.classAndBaseClass[aClass] else {
-                continue
-            }
-            let reRecur = recursiveBaseClass(className: aClass, baseClasses: baseClasses)
-            if reRecur.count > 0 {
-                classWithBaseClasses[aClass] = reRecur
-            }
-        }
+        // 类的继承链，找出类的继承链
+        var classWithBaseClasses = ParseOCMethodContent.findAllBaseClassMap(filterClassData: &filterClassData)
         
         // 通过类的继承链找出基类是 Cell 的，还有类名后缀是 Cell 的
         for aNode in allNodes {
@@ -87,16 +39,16 @@ public class ParseOCMethodContent {
                     continue
                 }
                 
+                // 查找继承指定类的有哪些类继承。
+                // 查找继承链中有 UITableViewCell
                 if nodeBaseClasses.contains("UITableViewCell") {
                     cellClasses.insert(classValue.className)
                 }
                 
-//                if classValue.className.hasSuffix("Cell") {
-//                    cellClasses.insert(classValue.className)
-//                }
-            }
+            } // end if aNode.type == .class
             
-        }
+        } // end for aNode in allNodes
+        
         
         // 开始递归检查无用类
         var recursiveCount = 0
@@ -126,12 +78,15 @@ public class ParseOCMethodContent {
                         continue
                     }
                     
+                    // 用过的类
                     let usedSet = ParseOCMethodContent.parseAMethodUsedClass(node: aNode, allClass: filterClassData.allClassSet)
                     if usedSet.count > 0 {
                         for aSet in usedSet {
                             allUsedClassSet.insert(aSet)
                         }
+                        
                     } // end if usedSet.count > 0
+                    
                 } // end if aNode.type == .method
             } // end for aNode in allNodes
             var hasUnUsed = false
@@ -153,6 +108,9 @@ public class ParseOCMethodContent {
         
         // 递归调用
         var unUsedClassFromRecursive = recursiveCheckUnUsedClass(unUsed: Set<String>())
+        
+        // 取出 owner 和 bundle 对应关系
+        let classBundleOwner = ParseOCMethodContent.loadClassBundleOwner()
         
         let unUsedClassSetCopy = unUsedClassFromRecursive
         for aSet in unUsedClassSetCopy {
@@ -231,7 +189,7 @@ public class ParseOCMethodContent {
             } // end for
             
             // 后面加上时间主要是测试用，由于在文件名中加入了时间，会出现一个文件里多处修改会相互覆盖的问题。这个问题会在去除时间后解除。
-            FileHandle.fileSave(content: newContent, path: "\(data.filePath)")
+//            FileHandle.fileSave(content: newContent, path: "\(data.filePath)")
             
             // 统计
             OCStatistics.unUsedClasses(className: data.className, classStruct: data)
@@ -242,7 +200,7 @@ public class ParseOCMethodContent {
         let sortedClassInfo = allClassInfo.sortedByValue
         
         // 生成Excel，内容包括类名，对应的行、bundle、owner
-        let classBundleOwner = ParseOCMethodContent.loadClassBundleOwner()
+        
         var saveInfoStr = "类名,行,Bundle,Owner\n"
         var totalLine = 0
         for (k,v) in sortedClassInfo {
@@ -263,7 +221,7 @@ public class ParseOCMethodContent {
         return unUsedClassFromRecursive
     }
     
-    // 找出单个方法内用过的类
+    //MARK: 找出单个方法内用过的类
     static func parseAMethodUsedClass(node: OCNode, allClass: Set<String>) -> Set<String> {
         var usedClassSet:Set<String> = Set()
         guard node.type == .method else {
@@ -281,7 +239,14 @@ public class ParseOCMethodContent {
     }
     
     
-    // Bundle 和 Class 的关系
+    // MARK: 从 Name 里取出 Class
+    public static func bundleAndClassFromName(name:String) -> String {
+        let s1Arr = name.components(separatedBy: "[")
+        let className = s1Arr[1].components(separatedBy: "]")[0]
+        return className
+    }
+    
+    //MARK: Bundle 和 Class 的关系
     static func loadClassBundleOwner() -> [String:(String,String)] {
         
         let content = FileHandle.fileContent(path: Config.classBundleOwner.rawValue)
@@ -378,12 +343,56 @@ public class ParseOCMethodContent {
         try! str.write(toFile: "/Users/ming/Downloads/ClassBundle1025.csv", atomically: true, encoding: String.Encoding.utf8)
     }
     
-    // MARK:辅助方法
-    // 遍历所有节点
+    //辅助方法
+    // 通过类的继承链找出基类是 Cell 的，还有类名后缀是 Cell 的
     
+    //MARK: 找出所有类映射基类链
+    static func findAllBaseClassMap(filterClassData:inout FilterClassData) -> [String:Set<String>] {
+        var classWithBaseClasses = [String:Set<String>]()
+        for aClass in filterClassData.allClassSet {
+            //
+            let baseClasses = Set<String>()
+            guard filterClassData.classAndBaseClass[aClass] != nil else {
+                continue
+            }
+            let reRecur = ParseOCMethodContent.recursiveBaseClass(filterClassData: &filterClassData, className: aClass, baseClasses: baseClasses)
+            if reRecur.count > 0 {
+                classWithBaseClasses[aClass] = reRecur
+            }
+        }
+        return classWithBaseClasses
+    }
     
+    //MARK: 递归找出继承链
+    static func recursiveBaseClass( filterClassData:inout FilterClassData, className:String, baseClasses:Set<String>) -> Set<String> {
+        var reBaseClasses = baseClasses
+        guard let baseClass = filterClassData.classAndBaseClass[className] else {
+            return Set<String>()
+        }
+        
+        if baseClass != "NSObject" && filterClassData.classAndBaseClass[baseClass] != baseClass {
+            
+        } else {
+            return Set<String>()
+        }
+        
+        if className.hasPrefix("NS") || className.hasPrefix("UI") {
+            return Set<String>()
+        }
+        
+        // 以上是跳出递归的条件
+        reBaseClasses.insert(baseClass)
+        
+        let recursiveClasses = recursiveBaseClass(filterClassData: &filterClassData, className: baseClass, baseClasses: baseClasses)
+        for aClass in recursiveClasses {
+            reBaseClasses.insert(aClass)
+        }
+        
+        return reBaseClasses
+    }
     
-    static func traverseAllNodes(allNodes:[OCNode]) -> FilterClassData {
+    //MARK: 遍历所有节点，获取过滤的数据
+    static func traverseAllNodesForFilterData(allNodes:[OCNode]) -> FilterClassData {
         var filterClassData = FilterClassData(allClassSet: Set<String>(), allBaseClasses: Set<String>(), propertyTypes: Set<String>(), methodDefineUseClasses: Set<String>(), classAndBaseClass: [String:String](), cellClasses: Set<String>())
         for aNode in allNodes {
             if aNode.type == .class {

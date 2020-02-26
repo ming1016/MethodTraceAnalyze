@@ -25,7 +25,7 @@ class LaunchJSON {
     // MARK: 生成按时间的树状结构
     public static func tree(preFile: String, file: String = "") {
         // 获取工程方法
-        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath.rawValue)
+        let allNodes = ParseOC.ocNodes(workspacePath: Config.workPath())
         
         var sourceDic = [String:String]()
         
